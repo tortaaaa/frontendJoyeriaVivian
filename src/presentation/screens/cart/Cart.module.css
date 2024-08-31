@@ -1,0 +1,225 @@
+.cart {
+  padding: 20px;
+  display: flex;
+  flex-direction: column; /* Asegura que los elementos estén organizados verticalmente */
+  justify-content: flex-start; /* Alinea los elementos al inicio del contenedor */
+  align-items: stretch; /* Estira los elementos para que ocupen todo el ancho del contenedor */
+}
+
+.checkoutSteps {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 16px;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.checkoutSteps span {
+  margin-right: 10px;
+  font-weight: normal;
+}
+
+.checkoutSteps .activeStep {
+  color: #d4af37; /* Destaca el paso actual */
+}
+
+.cartContent {
+  display: flex;
+  flex-direction: row;
+}
+
+.cart h1 {
+  font-size: 28px;
+  font-weight: normal;
+  margin-bottom: 20px;
+}
+
+.cartItems {
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.cartItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: -20px;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.cartItemImage {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.cartItemImage:hover {
+  transform: translateY(-5px);
+}
+
+.cartItemDetails {
+  flex: 1;
+}
+
+.cartItemDetails h2,
+.cartItemDetails h4 {
+  font-weight: normal; /* Cambia a una fuente que no esté en negrita */
+  margin-bottom: -15px;
+  color: black;
+}
+
+.cartItemDetails h2:hover {
+  text-decoration: underline;
+}
+
+.cartItemControls {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.cartItemControls button {
+  background-color: #d4af37;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.cartItemControls button:hover {
+  background-color: #c39630;
+}
+
+.quantityControls {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.quantityControls button {
+  background-color: #d4af37;
+  color: white;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+}
+
+.quantityControls button:hover {
+  background-color: #c39630;
+}
+
+.quantityControls span {
+  display: inline-block;
+  width: 30px;
+  text-align: center;
+}
+
+.cartSummary {
+  display: block;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+}
+
+.cartSummary .total {
+  font-size: 20px;
+}
+
+.cartSummary .checkoutButton {
+  background-color: #dadada;
+  color: rgb(34, 34, 34);
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 2%;
+}
+
+.cartSummary .checkoutButton:hover {
+  background-color: #b3b3b3;
+}
+
+.cartItemsContainer {
+  flex-grow: 1; /* Ocupa el espacio disponible */
+  padding-left: 15%;
+}
+
+.cartPayment {
+  width: auto;
+  padding-top: 2%;
+  padding-right: 20%;
+  display: flex;
+  flex-direction: column; /* Organiza los hijos verticalmente */
+  align-items: center; /* Centra el botón y la advertencia */
+  margin-top: 20px;
+}
+
+.paymentDetails {
+  display: flex;
+  align-items: center; /* Alinea los elementos verticalmente en el centro */
+  margin-bottom: 20px; /* Espacio entre el precio total y el botón */
+}
+
+.cartIcon {
+  width: 40px; /* Ajuste según la necesidad */
+  height: 40px; /* Ajuste según la necesidad */
+  margin-right: 10px; /* Espacio entre el ícono del carrito y el texto */
+}
+
+.totalPrice {
+  font-weight: normal;
+  font-size: 24px;
+  margin-left: 10px;
+}
+
+.payButton {
+  background-color: #d4af37;
+  color: white;
+  border: none;
+  padding: 15px 20px;
+  cursor: pointer;
+  width: 100%; /* Asegura que el botón ocupe todo el ancho disponible */
+  max-width: 200px; /* Fijamos un ancho máximo para que no crezca */
+  min-width: 200px; /* Fijamos un ancho mínimo para evitar que cambie de tamaño */
+  transition: background-color 0.3s ease; /* Para un efecto suave al pasar el mouse */
+}
+
+.payButton:hover {
+  background-color: #c39630;
+}
+
+.warning {
+  color: red;
+  margin-top: 10px;
+  font-weight: bold;
+  text-align: center;
+  max-width: 300px;
+  margin: 10px auto 0 auto; /* Centrar la advertencia y mantener un espacio */
+}
+
+.arrowIcon {
+  margin: 0 20px; /* Añade un espacio después de la flecha y antes del siguiente texto */
+  color: #d4af37; /* Opcional: cambia el color del icono */
+  vertical-align: middle; /* Opcional: alinea el icono verticalmente con el texto */
+}
+
+.outOfStock {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.disabledButton {
+  background-color: #ccc !important; /* Cambia a gris cuando está deshabilitado */
+  cursor: not-allowed; /* Cambia el cursor a no permitido */
+}

@@ -1,0 +1,124 @@
+.productDetail {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  box-sizing: border-box;
+  color: black; /* Asegura que el texto esté en negro */
+}
+
+.imageSection {
+  flex: 1;
+  max-width: 50%; /* Ocupa casi la mitad de la pantalla */
+  text-align: center;
+}
+
+.slider {
+  width: 100%; /* Asegura que el slider ocupe todo el ancho disponible */
+  max-width: 70%; /* Asegura que el slider tenga un ancho máximo */
+  margin: auto;
+}
+
+.productImage {
+  width: 101%; /* Asegura que la imagen ocupe todo el ancho disponible */
+  height: auto;
+}
+
+.thumbnailContainer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.thumbnail {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.infoSection {
+  flex: 1;
+  max-width: 50%; /* Ocupa el resto de la pantalla */
+  padding-left: 20px;
+  margin-top: 2%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.infoSection h1 {
+  margin: 0 0 10px 0;
+}
+
+.infoSection h2 {
+  margin: 0 0 20px 0;
+  font-size: 1.2em;
+  color: #555;
+}
+
+.description {
+  margin: 10px 0;
+  font-size: 1em;
+  line-height: 1.5;
+  max-height: 150px; /* Altura máxima para la descripción */
+  min-height: 150px; /* Altura mínima para la descripción */
+  overflow: hidden; /* Oculta cualquier desbordamiento de texto */
+}
+
+.price {
+  color: #D6B469;
+  font-weight: bold;
+  font-size: 1.5em;
+  margin: 20px 0;
+}
+
+.outOfStockMessage {
+  color: white;
+  background-color: red;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  width: fit-content;
+  align-self: flex-start; /* Alinea el mensaje al inicio */
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.buyButton, .cartButton {
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 175px; /* Ancho fijo para los botones */
+}
+
+.buyButton {
+  background-color: #D6B469;
+  color: white;
+  border: none;
+}
+
+.buyButton:hover {
+  background-color: #b88a42;
+}
+
+.cartButton {
+  background-color: #fff;
+  color: #D6B469;
+  border: 1px solid #D6B469;
+}
+
+.cartButton:hover {
+  background-color: #f4f4f4;
+}
+
+.disabled {
+  background-color: #ccc !important;
+  color: #ffffff !important;
+  cursor: not-allowed !important;
+  border: none !important;
+}

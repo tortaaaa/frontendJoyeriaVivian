@@ -1,0 +1,72 @@
+.footer {
+  background-color: #402F0F;
+  color: white;
+  padding: 20px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between; /* Alinea los elementos en extremos opuestos */
+  align-items: center; /* Centra verticalmente los elementos */
+}
+
+.contactButton {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-weight: bold; /* Letras negritas */
+  cursor: pointer;
+  font-size: 1rem;
+  text-decoration: none; /* Elimina el subrayado */
+}
+
+.contactButton:hover {
+  color: #D6B469; /* Cambia el color al hacer hover para mejorar la accesibilidad */
+}
+
+.footer p {
+  margin: 0;
+  line-height: 1.5;
+  text-align: right; /* Alinea el texto a la derecha */
+}
+
+.left {
+  flex: 1; /* Usa todo el espacio disponible a la izquierda */
+  text-align: left; /* Asegura que el contenido esté alineado a la izquierda */
+}
+
+.right {
+  flex: 1; /* Usa todo el espacio disponible a la derecha */
+  text-align: right; /* Asegura que el contenido esté alineado a la derecha */
+}
+
+.locationLink {
+  margin-left: 10px;
+  color: inherit; /* Asegura que el color del ícono se herede del texto */
+  text-decoration: none; /* Elimina el subrayado del enlace */
+}
+
+.locationIcon {
+  font-size: 1.2em; /* Ajusta el tamaño del ícono según tus necesidades */
+  vertical-align: middle; /* Alinea el ícono verticalmente con el texto */
+}
+
+.locationIcon:hover {
+color:#f7f141
+}
+
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: row;
+    align-items: center;
+  }
+  .left, .right {
+    flex: none;
+    text-align: center; /* Centra el texto en pantallas pequeñas */
+  }
+  
+  .footer p {
+    font-size: 14px; /* Reduce el tamaño de la fuente en pantallas pequeñas */
+  }
+}

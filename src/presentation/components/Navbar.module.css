@@ -1,0 +1,129 @@
+/* src/presentation/components/Navbar.module.css */
+.topNavbar {
+  background-color: #F4F4F4; /* Color de fondo */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.logo {
+  height: 50px;
+}
+
+.searchInput {
+  flex-grow: 1;
+  margin: 0 20px 0 auto; /* Margin-left auto para empujar el input hacia la derecha */
+  padding: 5px 10px;
+  border: 1px solid #D6B469; /* Color del borde similar al dorado del mockup */
+  background-color: #FFF; /* Fondo blanco */
+  border-radius: 5px; /* Bordes redondeados */
+  max-width: 300px; /* Ajusta el ancho máximo según sea necesario */
+}
+
+.cartLink {
+  position: relative;
+}
+
+.cartIcon {
+  height: 40px; /* Incrementa el tamaño del ícono del carrito */
+  margin-right: 10px;
+}
+
+.cartBadge {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background-color: #D6B469;
+  color: white;
+  border-radius: 50%;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+.menuButton {
+  display: none; /* Ocultar el botón del menú por defecto */
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.menuIcon {
+  font-size: 24px;
+  color: #D6B469; /* Color del ícono del menú */
+}
+
+.bottomNavbar {
+  background-color: #D6B469;
+  display: flex;
+  justify-content: space-between; /* Ajustamos para que los elementos se distribuyan correctamente */
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 10px; /* Añadimos padding para asegurarnos de que los elementos no toquen el borde */
+}
+
+.navLinks {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1; /* Asegura que ocupe todo el ancho disponible */
+}
+
+.navLinks li {
+  margin: 0 15px;
+  font-size: 20px;
+}
+
+.navLinks a {
+  color: white;
+  text-decoration: none;
+  font-weight: normal; /* Cambiamos a normal para quitar las negritas */
+  transition: color 0.3s; /* Añade una transición suave para el cambio de color */
+}
+
+.navLinks a:hover {
+  color: #B88A42; /* Color dorado oscuro para el hover */
+}
+
+.navLinks li:last-child {
+  margin-left: auto; /* Empuja el último elemento a la derecha */
+}
+
+/* Estilos y animación para el menú deslizante en pantallas pequeñas */
+@media (max-width: 925px) {
+  .searchInput {
+    max-width: 200px; /* Reduce el ancho máximo en pantallas pequeñas */
+  }
+  .bottomNavbar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: fixed;
+    top: 77px;
+    right: -300px; /* Inicialmente fuera de la pantalla */
+    height: 100%;
+    width: 250px;
+    background-color: #D6B469;
+    padding: 20px;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+    transition: right 0.3s ease; /* Animación para el deslizamiento */
+  }
+  .navLinks {
+    display: flex;
+    flex-direction: column; /* Cambia la dirección a columna */
+    align-items: flex-start; /* Alinea los elementos al inicio */
+    width: 100%; /* Asegura que ocupe todo el ancho disponible */
+  }
+  .menuButton {
+    display: block; /* Muestra el botón del menú en pantallas pequeñas */
+  }
+  .showMenu {
+    right: 0; /* Desliza el menú dentro de la pantalla */
+  }
+  .navLinks li {
+    margin: 10px 0; /* Añade un margen entre los elementos */
+  }
+}
