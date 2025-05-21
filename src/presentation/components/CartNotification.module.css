@@ -24,15 +24,19 @@
   .details {
     display: flex;
     flex-direction: column;
+    color: black;
   }
   
   .details h4 {
     margin: 0;
     font-size: 14px;
+    color: black;
   }
   
   .details p {
     margin: 2px 0;
     font-size: 12px;
+    color: black;
+
   }
   

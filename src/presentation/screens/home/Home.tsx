@@ -20,11 +20,9 @@ const Home: React.FC = () => {
           </div>
         </Slider>
         <div className={styles.text}>
-          <h1>Bienvenido/a</h1>
+          <h1>Bienvenido</h1>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis justo quam.
-            Integer non magna ut arcu vulputate scelerisque a sed lorem. Quisque a sapien arcu.
-            Maecenas gravida ligula ac libero eleifend euismod.
+            Explora nuestra variedad de productos de joyería. Desde anillos hasta collares, tenemos algo para cada ocasión. 
           </p>
           <button className={styles.button}>Compra Ya</button>
         </div>

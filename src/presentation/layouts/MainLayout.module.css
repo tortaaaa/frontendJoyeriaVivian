@@ -1,18 +1,15 @@
 .layout {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  background-color: #fff;
-  overflow-x: hidden;
+  min-height: 100vh; /* Asegura que el layout ocupe toda la altura de la pantalla */
   width: 100%;
   margin: 0;
   padding: 0;
 }
 
 .content {
-  flex-grow: 1;
+  flex: 1 0 auto; /* Permite que el contenido crezca y ocupe el espacio disponible */
   padding: 20px;
   box-sizing: border-box;
   width: 100%;
-  overflow-y: auto; /* Permite el scroll vertical en el contenido */
 }

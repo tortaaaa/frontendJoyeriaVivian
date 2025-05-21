@@ -16,6 +16,7 @@
   border-top: 1px solid #ddd;
   margin-left: 10%;
   margin-right: 10%;
+  color: #6b6b6b;
 }
 
 .checkoutSteps span {
@@ -36,6 +37,7 @@
   font-size: 28px;
   font-weight: normal;
   margin-bottom: 20px;
+  color: #000000;
 }
 
 .cartItems {
@@ -121,6 +123,7 @@
   display: inline-block;
   width: 30px;
   text-align: center;
+  color: #000000;
 }
 
 .cartSummary {
@@ -134,6 +137,7 @@
 
 .cartSummary .total {
   font-size: 20px;
+  color: #000000;
 }
 
 .cartSummary .checkoutButton {
@@ -180,6 +184,7 @@
   font-weight: normal;
   font-size: 24px;
   margin-left: 10px;
+  color: #000000;
 }
 
 .payButton {
