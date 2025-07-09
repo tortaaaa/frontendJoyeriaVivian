@@ -7,12 +7,17 @@ const MainLayout: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   return (
     <div className={styles.layout}>
       <Navbar />
+
       <main className={styles.content}>
+        {/* Contenido principal de la página */}
         {children}
+
       </main>
+
       <Footer />
     </div>
   );
 };
+
 
 export default MainLayout;

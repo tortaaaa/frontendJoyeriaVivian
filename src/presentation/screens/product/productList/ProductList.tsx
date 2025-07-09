@@ -1,8 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams} from 'react-router-dom';
 import styles from './ProductList.module.css';
 import fetchProductsByCategory from './ViewModel';
-import { ProductByFilter } from '../../../../domain/useCases/product/ProductByFilter'; // Importa la función para buscar por filtro
 import { CartContext } from '../../../context/CartContext';
 import { Product } from '../../../../domain/entities/Product';
 import Spinner from '../../../components/Spinner'; // Importa el componente Spinner
@@ -34,26 +33,15 @@ const ProductList: React.FC = () => {
   useEffect(() => {
     const loadProducts = async () => {
       try {
-        setLoading(true);
-        let fetchedProducts;
-        
-        if (category === 'matrimonio' || category === 'hombres') {
-          // Si la categoría es 'matrimonio' o 'hombres', usa la función de filtro
-          console.log(`[INFO] Cargando productos con filtro: ${category}`);
-          fetchedProducts = await ProductByFilter(category);
-        } else {
-          // Mapea la categoría y usa la búsqueda normal por categoría
-          const mappedCategory = categoryMapping[category || 'ring'];
-          console.log(`[INFO] Cargando productos de la categoría: ${mappedCategory}`);
-          fetchedProducts = await fetchProductsByCategory(mappedCategory);
-        }
-
+        const mappedCategory = categoryMapping[category || 'ring'];
+        console.log(`[INFO] Cargando productos de la categoría: ${mappedCategory}`);
+        const fetchedProducts = await fetchProductsByCategory(mappedCategory);
         setProducts(fetchedProducts);
+        setLoading(false);
         console.log('[INFO] Productos cargados con éxito:', fetchedProducts);
       } catch (error) {
         console.error('[ERROR] Fallo al cargar los productos:', error);
         setError('Failed to load products');
-      } finally {
         setLoading(false);
       }
     };
@@ -137,6 +125,7 @@ const ProductList: React.FC = () => {
     }
   };
 
+  // Usamos window.location.href para forzar una recarga completa
   const handleProductClick = (producto: Product) => {
     window.location.href = `/product/${producto.product_code}`;
   };
@@ -150,7 +139,6 @@ const ProductList: React.FC = () => {
   if (loading) return <Spinner />;
 
   if (error) return <p>{error}</p>;
-
 
   return (
     <div className={styles.container}>

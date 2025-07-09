@@ -4,12 +4,13 @@
   padding: 20px;
   background-color: #ffffff;
   border-radius: 25px;
-  color: black;
+  color: #000000;
   text-align: center;
+  font-family: Arial, sans-serif;
 }
 
 .iconBlack {
-  color: black;
+  color: #000000;
   font-size: 24px;
 }
 
@@ -30,10 +31,12 @@
 
 .contactMethods {
   text-align: left;
+  color: #000000;
 }
 
 .contactMethods h2 {
   margin-bottom: 20px;
+  font-weight: bold;
 }
 
 .contactRow {
@@ -49,22 +52,29 @@
   width: 100%;
 }
 
-.contactMethod a, 
+.contactMethod a,
 .contactMethod span {
   font-size: 23px;
   margin-left: 10px;
-  white-space: nowrap; /* Prevents text from wrapping */
+  white-space: nowrap;
+  color: #000000;
+  text-decoration: none;
 }
 
-.contactMethod .contactText {
-  white-space: nowrap; /* Prevent text wrapping */
-  overflow: hidden; /* Hide overflowing text */
-  text-overflow: ellipsis; /* Add ellipsis to overflowing text */
+.contactMethod a:hover {
+  text-decoration: underline;
+}
+
+.contactText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .icon {
   font-size: 30px;
-  flex-shrink: 0; /* Prevent the icon from shrinking */
+  flex-shrink: 0;
+  color: #000000;
 }
 
 .formContainer {
@@ -74,25 +84,28 @@
   border-radius: 25px;
   max-width: 750px;
   margin: 0 auto;
+  font-family: Arial, sans-serif;
 }
 
 .formContainer h2 {
   margin-bottom: 20px;
   font-weight: normal;
+  color: #000000;
 }
 
 .form {
-  color: #000000;
   background-color: #f4f4f4;
   border-radius: 25px;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 20px;
 }
 
 .form h3 {
   margin-bottom: 20px;
+  color: #000000;
 }
 
 .formGroup {
@@ -105,6 +118,7 @@
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
+  color: #000000;
 }
 
 .formGroup input,
@@ -114,6 +128,8 @@
   border: 1px solid #000000;
   border-radius: 5px;
   background-color: #ffffff;
+  color: #000000;
+  font-family: Arial, sans-serif;
 }
 
 .formGroup textarea {
@@ -122,12 +138,13 @@
 
 .submitButton {
   background-color: #D6B469;
-  color: white;
+  color: #ffffff;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+  font-family: Arial, sans-serif;
 }
 
 .submitButton:hover {
@@ -139,4 +156,3 @@
   font-size: 14px;
   margin-top: 5px;
 }
-

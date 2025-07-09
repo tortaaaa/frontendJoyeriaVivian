@@ -16,7 +16,6 @@
   border-top: 1px solid #ddd;
   margin-left: 10%;
   margin-right: 10%;
-  color: #6b6b6b;
 }
 
 .checkoutSteps span {
@@ -37,7 +36,6 @@
   font-size: 28px;
   font-weight: normal;
   margin-bottom: 20px;
-  color: #000000;
 }
 
 .cartItems {
@@ -71,6 +69,12 @@
 
 .cartItemDetails h2,
 .cartItemDetails h4 {
+  font-weight: normal; /* Cambia a una fuente que no esté en negrita */
+  margin-bottom: -15px;
+  color: black;
+}
+
+.cartTitle h2{
   font-weight: normal; /* Cambia a una fuente que no esté en negrita */
   margin-bottom: -15px;
   color: black;
@@ -123,7 +127,6 @@
   display: inline-block;
   width: 30px;
   text-align: center;
-  color: #000000;
 }
 
 .cartSummary {
@@ -136,8 +139,8 @@
 }
 
 .cartSummary .total {
+  color: rgb(34, 34, 34);
   font-size: 20px;
-  color: #000000;
 }
 
 .cartSummary .checkoutButton {
@@ -181,10 +184,10 @@
 }
 
 .totalPrice {
+  color: rgb(34, 34, 34);
   font-weight: normal;
   font-size: 24px;
   margin-left: 10px;
-  color: #000000;
 }
 
 .payButton {

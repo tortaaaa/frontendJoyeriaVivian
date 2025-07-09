@@ -76,26 +76,26 @@ const Cart: React.FC = () => {
         />
       )}
       <div className={styles.checkoutSteps}>
-        <span className={styles.activeStep}>CARRITO</span>
+        <span className={styles.activeStep}>Carrito</span>
         <FaArrowRight className={styles.arrowIcon} />
-        <span>DATOS DEL COMPRADOR</span>
+        <span className={styles.activeStep}>Detalles de compra</span>
         <FaArrowRight className={styles.arrowIcon} />
-        <span>PROCESO DE PAGO</span>
+        <span className={styles.activeStep}>Procesando el pago</span>
         <FaArrowRight className={styles.arrowIcon} />
-        <span>COMPROBANTE</span>
+        <span className={styles.activeStep}>Entrega de comprobante</span>
       </div>
       <div className={styles.cartContent}>
         <div className={styles.cartItemsContainer}>
-          <h1>Carrito de Compras</h1>
+          <h2> Carrito de Compras</h2>
           {cart && cart.length > 0 ? (
             <div className={styles.cartItems}>
               {cart.map(item => (
                 <div key={item.product_code} className={styles.cartItem}>
                   <img src={item.images[0]} alt={`Producto ${item.product_code}`} className={styles.cartItemImage} />
                   <div className={styles.cartItemDetails}>
+                    <h4>Código de producto: {item.product_code}</h4>
                     <h2>{item.name}</h2>
                     <h4>{item.description}</h4>
-                    <h4>Código de producto: {item.product_code}</h4>
                     <h4>${item.price.toLocaleString()} CLP</h4>
                     {item.stock < 1 && <p className={styles.outOfStock}>Producto sin stock</p>}
                     <div className={styles.cartItemControls}>
@@ -103,11 +103,11 @@ const Cart: React.FC = () => {
                         <button
                           onClick={() => handleDecrement(item)}
                           disabled={item.quantity <= 1 || item.stock === 0}
-                          className={item.stock === 0 ? styles.disabledButton : ''}
+                          className={item.stock === 0 ? styles.outOfStock : ''}
                         >
                           -
                         </button>
-                        <span>{item.stock > 0 ? item.quantity : 0}</span>
+                        <span style={{ color: 'black' }}>{item.stock > 0 ? item.quantity : 0} </span>
                         <button
                           onClick={() => handleIncrement(item)}
                           disabled={item.quantity >= item.stock || item.stock === 0}
@@ -133,7 +133,7 @@ const Cart: React.FC = () => {
         <div className={styles.cartPayment}>
           <div className={styles.paymentDetails}>
             <img src={cartIcon} alt="Carrito" className={styles.cartIcon} />
-            <div className={styles.totalPrice}>Total: ${getTotalPrice().toLocaleString()} CLP</div>
+            <div className={styles.total}>Total: ${getTotalPrice().toLocaleString()} CLP</div>
           </div>
           <button
             className={getTotalPrice() <= 0 ? `${styles.payButton} ${styles.disabledButton}` : styles.payButton}

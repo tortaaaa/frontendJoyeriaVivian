@@ -41,7 +41,7 @@ const Navbar: React.FC = () => {
           <li><a href="/products/cadenas">Cadenas</a></li>
           <li><a href="/products/pulseras">Pulseras</a></li>
           <li><a href="/products/colgantes">Colgantes</a></li>
-          <li><a href="/products/hombres">Hombres</a></li>
+          <li><a href="/products/Joyas para hombres">Hombres</a></li>
           <li><a href="/">Servicios de Orfebrería</a></li>
           <li><a href="/">¿Quiénes Somos?</a></li>
         </ul>
