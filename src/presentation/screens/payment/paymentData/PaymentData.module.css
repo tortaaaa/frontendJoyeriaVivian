@@ -32,7 +32,6 @@ h2 {
     flex-direction: column;
     width: 100%;
     max-width: 400px;
-    color: black;
 }
 
 .inputField, .textAreaField {
@@ -42,7 +41,6 @@ h2 {
     border-radius: 4px;
     background-color: #f5f5f5;
     font-size: 16px;
-    color: black;
 }
 
 .textAreaField {
@@ -71,25 +69,23 @@ h2 {
 
 .checkoutSteps {
     text-align: center;
-    margin-bottom: 20px;
     font-size: 16px;
+    padding: 10px 0; /* Añade un poco de padding superior e inferior */
+    flex-grow: 1; /* Hace que el elemento ocupe todo el espacio disponible */
     padding-top: 2%;
     padding-bottom: 2%;
     border-bottom: 1px solid #ddd;
     border-top: 1px solid #ddd;
-    margin-left: 10%;
-    margin-right: 10%;
-    color: #6b6b6b;
-  }
-  
-  .checkoutSteps span {
+}
+
+.checkoutSteps span {
     margin-right: 10px;
     font-weight: normal;
   }
-  
-  .checkoutSteps .activeStep {
+
+.checkoutSteps .activeStep {
     color: #d4af37; /* Destaca el paso actual */
-  }
+}
 
 .arrowIcon {
     margin: 0 20px; /* Añade un espacio después de la flecha y antes del siguiente texto */

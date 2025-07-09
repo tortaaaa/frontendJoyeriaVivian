@@ -82,47 +82,46 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   };
 
   const addToCart = (item: CartItem) => {
-    setCart(prevCart => {
-      const existingItemIndex = prevCart.findIndex(cartItem => cartItem.id === item.id);
-      if (existingItemIndex > -1) {
-        const updatedCart = [...prevCart];
-        const existingItem = updatedCart[existingItemIndex];
-  
-        // Verifica si ya existe el producto y ajusta la cantidad.
-        // Se asegura de no exceder el stock.
-        const newQuantity = existingItem.quantity + item.quantity;
-        if (newQuantity > existingItem.stock) {
-          existingItem.quantity = existingItem.stock;
-        } else if (newQuantity < 1) {
-          existingItem.quantity = 1; // Nunca reducir a menos de 1
-        } else {
-          existingItem.quantity = newQuantity;
-        }
-  
-        return updatedCart;
-      }
-  
-      // Nuevo producto en el carrito.
-      if (item.quantity > item.stock) {
-        item.quantity = item.stock;
-      }
-      return [...prevCart, item];
-    });
-  
-    // Notificación
-    setNotification({ product: item, visible: true });
-  
-    // Ocultar notificación después de 3 segundos
-    setTimeout(() => {
-      setNotification(null);
-    }, 3000);
-  };
+  setCart(prevCart => {
+    const existingItemIndex = prevCart.findIndex(
+      cartItem => cartItem.product_code === item.product_code
+    );
+
+    if (existingItemIndex > -1) {
+      const updatedCart = [...prevCart];
+      const existingItem = updatedCart[existingItemIndex];
+
+      const newQuantity = existingItem.quantity + item.quantity;
+      const adjustedQuantity = Math.min(
+        Math.max(newQuantity, 1),
+        existingItem.stock
+      );
+
+      updatedCart[existingItemIndex] = {
+        ...existingItem,
+        quantity: adjustedQuantity,
+      };
+
+      return updatedCart;
+    }
+
+    // Producto nuevo
+    const adjustedQuantity = Math.min(item.quantity, item.stock);
+    return [...prevCart, { ...item, quantity: adjustedQuantity }];
+  });
+
+  // Mostrar notificación
+  setNotification({ product: item, visible: true });
+
+  setTimeout(() => {
+    setNotification(null);
+  }, 3000);
+};
   
 
-  const removeFromCart = (id: string) => {
-    setCart(prevCart => prevCart.filter(item => item.id !== id));
+  const removeFromCart = (productCode) => {
+    setCart(prevCart => prevCart.filter(item => item.product_code !== productCode));
   };
-
   const clearCart = () => {
     setCart([]);
   };
