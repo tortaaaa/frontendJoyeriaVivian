@@ -10,7 +10,7 @@
 }
 
 .logo {
-  height: 50px;
+  height: 70px;
 }
 
 .searchInput {
@@ -74,14 +74,15 @@
 
 .navLinks li {
   margin: 0 15px;
-  font-size: 20px;
+  font-size: 17px;
 }
 
 .navLinks a {
-  color: white;
+  color: #F4F4F4;
   text-decoration: none;
   font-weight: normal; /* Cambiamos a normal para quitar las negritas */
   transition: color 0.3s; /* Añade una transición suave para el cambio de color */
+  font-family: 'Roboto', sans-serif; /* Aplicar la fuente Roboto */
 }
 
 .navLinks a:hover {

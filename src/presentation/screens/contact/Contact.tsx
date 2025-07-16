@@ -50,7 +50,7 @@ const Contact: React.FC = () => {
             <div className={styles.contactMethod}>
               <FaEnvelope className={`${styles.icon} ${styles.iconBlack}`} />
              
-              <span className={styles.contactText}>contacto.joyeriavivian@gmail.com</span>
+              <span className={styles.contactText}>Contacto: joyeriavivian@gmail.com</span>
             </div>
             <div className={styles.contactMethod}>
               <FaWhatsapp className={`${styles.icon} ${styles.iconBlack}`} />
@@ -61,7 +61,7 @@ const Contact: React.FC = () => {
         </div>
       </div>
       <div className={styles.formContainer}>
-        <h2>Si gustas nos podemos comunicar contigo, completa el formulario a continuación y te contactamos en cuanto podamos. Gracias.</h2>
+        <h3> Si gustas nos podemos comunicar contigo, completa el formulario a continuación y te contactamos en cuanto podamos. Gracias.</h3>
         <Formik
           initialValues={{ name: '', email: '', subject: '', message: '' }}
           validationSchema={validationSchema}

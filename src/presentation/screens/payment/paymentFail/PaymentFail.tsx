@@ -1,35 +1,17 @@
+// src/presentation/screens/payment/paymentFail/PaymentFail.tsx
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import styles from './PaymentFail.module.css';
+import { useLocation } from 'react-router-dom';
 
 const PaymentFail: React.FC = () => {
   const location = useLocation();
-  const navigate = useNavigate();
-  const query = new URLSearchParams(location.search);
-  const status = query.get('status');
-  const message = query.get('message');
+  const queryParams = new URLSearchParams(location.search);
 
-  const getMessage = () => {
-    if (status === 'canceled') {
-      return 'La transacción fue cancelada por el usuario. Si deseas intentarlo de nuevo, por favor realiza el pago nuevamente.';
-    }
-    if (status === 'rejected') {
-      return `La transacción fue rechazada. Motivo: ${message || 'Desconocido'}. Por favor, inténtelo de nuevo o utilice otro método de pago.`;
-    }
-    return 'Hubo un error durante el proceso de pago. Por favor, inténtelo de nuevo.';
-  };
-
-  const handleRetry = () => {
-    navigate('/cart'); // Redirigir al carrito para reintentar
-  };
+  const message = queryParams.get('message');
 
   return (
-    <div className={styles.container}>
-      <h2>Pago Fallido</h2>
-      <p>{getMessage()}</p>
-      <button onClick={handleRetry} className={styles.retryButton}>
-        Volver al Carrito
-      </button>
+    <div>
+      <h1>Pago Fallido</h1>
+      <p>{message || 'La transacción no pudo ser completada. Por favor, intente nuevamente.'}</p>
     </div>
   );
 };

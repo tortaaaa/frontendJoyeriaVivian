@@ -1,39 +1,50 @@
 .home {
+  width: 100vw;
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  height: 100%; /* Asegura que ocupe todo el espacio disponible */
-  width: 100%; /* Asegura que ocupe todo el ancho de la pantalla */
+  align-items: center;
+  padding: 0;
   margin: 0;
-  padding: 20px;
-  box-sizing: border-box;
   background-color: #ffffff;
+  box-sizing: border-box;
 }
 
+/* Sección superior: slider + texto */
 .welcome {
   display: flex;
-  flex-direction: row;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-  text-align: left;
-  max-width: 1200px; /* Limita el ancho máximo del contenedor */
-  width: 100%; /* Asegura que ocupe todo el ancho del contenedor */
+  width: 100%;
+  flex-wrap: wrap;
+  padding: 60px 20px;
+  gap: 40px;
 }
 
 .slider {
-  width: 500px;
-  margin-right: 10%;
+  position: relative;
+  width: 40%;
+  min-width: 300px;
+  max-width: 600px;
 }
 
 .ringImage {
   width: 100%;
-  height: auto;
+  max-height: 500px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+  border-radius: 10px;
 }
 
 .text {
-  margin-left: 20px;
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+  font-size: 18px;
   color: #000;
+  text-align: left;
 }
 
 .button {
@@ -44,34 +55,61 @@
   cursor: pointer;
   font-size: 16px;
   margin-top: 20px;
+  transition: background-color 0.3s ease;
 }
 
-@media (max-width: 1000px) { 
-  .slider {
-    width: 500px;
-    margin-right: 0%;
-  }
+.button:hover {
+  background-color: #b89542;
 }
 
-  @media (max-width: 768px) {
-  .home {
+/* Segunda sección: texto a la izquierda, imagen/slider a la derecha */
+.textSliderSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.textWrapper {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+  text-align: left;
+}
+
+.sliderWrapper {
+  flex: 1;
+  min-width: 300px;
+  max-width: 600px;
+}
+
+.sliderWrapper .ringImage {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 0 auto;
+  display: block;
+}
+
+/* Responsive: columnas se apilan */
+@media (max-width: 768px) {
+  .welcome,
+  .textSliderSection {
     flex-direction: column;
-    padding: 10px;
-  }
-  .welcome {
-    flex-direction: column;
-    align-items: center;
-  }
-  .slider {
-    max-width: 50%;
-    margin-bottom: 20px;
-  }
-  .text {
-    margin-left: 0;
     text-align: center;
   }
-  .button {
-    margin: 20px auto 0;
+
+  .text,
+  .textWrapper {
+    text-align: center;
   }
 
+  .slider,
+  .sliderWrapper {
+    width: 100%;
+    max-width: 100%;
+  }
 }

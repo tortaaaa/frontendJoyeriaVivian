@@ -86,7 +86,7 @@ html, body {
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Roboto', sans-serif; /* Aplicar la fuente Roboto */;
   background-color: #fff;
 }
 
@@ -95,6 +95,7 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
+  color: #000000;
 }
 
 main {

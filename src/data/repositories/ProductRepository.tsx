@@ -61,32 +61,4 @@ export class ProductRepositoryImpl implements ProductRepository {
             throw error;
         }
     }
-
-    async getProductByFilter(product_filter: string): Promise<Product[]> {
-        try {
-            console.log(`[INFO] Solicitando productos con filtro: ${product_filter}`);
-            const response = await api.get(`/api/products/filter/${product_filter}`);
-            console.log('[INFO] Productos recibidos:', response.data);
-
-            return response.data.map((item: any) => ({
-                product_code: item.product_code, // Clave primaria
-                name: item.name,
-                category: item.category,
-                price: item.price,
-                stock: item.stock,
-                description: item.description,
-                weight: parseFloat(item.weight),
-                material: item.material,
-                gemstone_type: item.gemstone_type,
-                gemstone_size: parseFloat(item.gemstone_size),
-                is_wedding: item.is_wedding,
-                is_baby: item.is_baby,
-                is_men: item.is_men,
-                images: item.images
-            }));
-        } catch (error) {
-            console.error("[ERROR] Error al obtener productos por filtro:", error);
-            throw error;
-        }
-    }
 }
