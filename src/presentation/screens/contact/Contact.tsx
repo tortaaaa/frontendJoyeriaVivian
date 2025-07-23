@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Contact.module.css';
 import logo2 from '../../../../src/assets/images/JoyeriaVivianLogo2.jpg';
-import { FaInstagram, FaEnvelope, FaWhatsapp } from 'react-icons/fa';
+import { FaInstagram, FaEnvelope, FaWhatsapp, FaFacebook } from 'react-icons/fa';
 import Modal from '../../components/Modal';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -39,22 +39,30 @@ const Contact: React.FC = () => {
         <img src={logo2} alt="Ring" className={styles.ringImage} />
         <div className={styles.contactMethods}>
           <h2>Nos puedes contactar por cualquiera de estos medios</h2>
+          <h3>Siguenos en nuestras redes:</h3>
           <div className={styles.contactRow}>
             <div className={styles.contactMethod}>
               <a href="https://www.instagram.com/joyeriavivian" target="_blank" rel="noopener noreferrer">
                 <FaInstagram className={`${styles.icon} ${styles.iconBlack}`} />
               </a>
-              <span>Instagram</span>
-              <span className={styles.contactText}>@joyeria.vivian</span>
+              <span className={styles.contactText}>joyeria.vivian</span>
+            </div>
+              <div className={styles.contactMethod}>
+              <a href="https://www.facebook.com/JoyeriaVivian" target="_blank" rel="noopener noreferrer">
+                <FaFacebook className={`${styles.icon} ${styles.iconBlack}`} />
+              </a>
+              <span className={styles.contactText}>Joyería Vivian </span>
             </div>
             <div className={styles.contactMethod}>
-              <FaEnvelope className={`${styles.icon} ${styles.iconBlack}`} />
-             
-              <span className={styles.contactText}>Contacto: joyeriavivian@gmail.com</span>
+              <a href="mailto:joyeriavivian@gmail.com" target="_blank" rel="noopener noreferrer">
+                <FaEnvelope className={`${styles.icon} ${styles.iconBlack}`} />
+              </a>
+              <span className={styles.contactText}>joyeriavivian@gmail.com</span>
             </div>
             <div className={styles.contactMethod}>
-              <FaWhatsapp className={`${styles.icon} ${styles.iconBlack}`} />
-         
+              <a href="https://wa.me/56912345678?text=Hola%20quiero%20más%20información%20sobre%20sus%20joyas" target="_blank" rel="noopener noreferrer">
+                <FaWhatsapp className={`${styles.icon} ${styles.iconBlack}`} />
+              </a>
               <span className={styles.contactText}>+56 9 1234 5678</span>
             </div>
           </div>
