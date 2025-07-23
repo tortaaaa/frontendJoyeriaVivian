@@ -21,6 +21,7 @@
   background-color: #FFF; /* Fondo blanco */
   border-radius: 5px; /* Bordes redondeados */
   max-width: 300px; /* Ajusta el ancho máximo según sea necesario */
+  color: #000;
 }
 
 .cartLink {
