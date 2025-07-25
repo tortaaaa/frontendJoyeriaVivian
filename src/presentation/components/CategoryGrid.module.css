@@ -1,44 +1,64 @@
-.container {
+.wrapper {
+  padding: 2rem 0;
+  background-color: #D6B469; 
   text-align: center;
-  padding: 40px 20px;
-  background-color: #fff;
 }
 
-.description {
-  color: #333;
-  font-size: 16px;
-  margin-bottom: 30px;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
+.title {
+  font-size: 1.8rem;
+  color: #fff;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.grid {
+.carouselWrapper {
+  overflow: hidden;
+  position: relative;
+  padding: 1rem 0;
+}
+
+.carousel {
   display: flex;
-  flex-wrap: nowrap;     /* fila horizontal sin salto */
-  gap: 30px;
-  overflow-x: auto;      /* scroll horizontal si no caben */
-  padding-bottom: 10px;  /* espacio para scrollbar */
-  justify-content: flex-start;
+  width: fit-content;
+  animation: scroll 40s linear infinite;
 }
 
-.item {
-  width: 180px;
-  flex-shrink: 0;        /* que no se achiquen */
-  text-align: center;
+.carouselWrapper:hover .carousel {
+  animation-play-state: paused;
 }
 
-.item img {
-  width: 100%;
+.slide {
+  flex: 0 0 auto;
+  margin: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.slide img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
   border-radius: 10px;
-  transition: transform 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border: 2px solid #fff;
 }
 
-.item img:hover {
-  transform: scale(1.05);
-}
-
-.item p {
+/* Nuevo estilo para mostrar los nombres */
+.categoryName {
   margin-top: 10px;
-  font-weight: bold;
+  font-size: 16px;
+  color: #fff;
+  font-weight: 500;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }

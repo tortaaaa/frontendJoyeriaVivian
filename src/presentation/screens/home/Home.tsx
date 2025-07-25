@@ -1,7 +1,7 @@
 import React from 'react';
 import Slider from "react-slick";
+import { useNavigate } from 'react-router-dom';
 import styles from './Home.module.css';
-
 import slide1 from '../../../../src/assets/images/slide1.jpg';
 import slide2 from '../../../../src/assets/images/slide2.jpg';
 import slide3 from '../../../../src/assets/images/slide3.jpg';
@@ -13,8 +13,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import CategoryGrid from '../../../../src/presentation/components/CategoryGrid';
+import orfebre from '../../../assets/images/taller_de_orfebreria.jpg'; // Usa tu imagen real
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <div className={styles.home}>
       
@@ -43,8 +45,10 @@ const Home: React.FC = () => {
           <button className={styles.button}>Descubre más</button>
         </div>
       </div>
+
+      {/* Segunda sección con texto y slider */}
       <div className={styles.textSliderSection}>
-        <div className={styles.textWrapper}>
+        <div className={styles.text}>
           <h2>Descubre nuestra colección</h2>
           <p>Explora las piezas más exclusivas y elegantes diseñadas para ti.</p>
           <button className={styles.button}>Comprar Ahora</button>
@@ -57,9 +61,20 @@ const Home: React.FC = () => {
         </div>
       </div>
 
-      {/* Contenedor catálogo abajo */}
       <CategoryGrid />
-
+      <div className={styles.textSliderSection}>
+        <div className={styles.text}>
+          <h2>Joyas personalizadas</h2>
+           <p>¿Estás buscando el Anillo de compromiso perfecto para ese gran momento?</p>
+           <p>¿Te gustaría regalarte una joya especial para celebrar un logro o momento importante?</p>
+              <button className={styles.button}onClick={() => navigate('/Orfebreria')}>
+                Más Información
+              </button>
+        </div>
+        <div className={styles.imagen}>
+          <img src={orfebre} alt="Orfebre trabajando" />
+        </div>
+      </div>
     </div>
   );
 };

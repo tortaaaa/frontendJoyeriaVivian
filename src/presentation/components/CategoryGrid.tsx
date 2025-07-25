@@ -1,33 +1,31 @@
 import React from 'react';
 import styles from './CategoryGrid.module.css';
-
-interface Category {
-  name: string;
-  image: string;
-}
-
-const categories: Category[] = [
-  { name: 'Necklaces & Pendants', image: '/images/categories/necklaces.jpg' },
-  { name: 'Earrings', image: '/images/categories/earrings.jpg' },
-  { name: 'Rings', image: '/images/categories/rings.jpg' },
-  { name: 'Bracelets', image: '/images/categories/bracelets.jpg' },
+import { Link } from 'react-router-dom';
+const images = [
+  { name: 'Cadenas', image: '/images/categories/joya1.jpg', path: '/products/cadenas' },
+  { name: 'Anillos', image: '/images/categories/joya2.jpg', path: '/products/anillos' },
+  { name: 'Aros', image: '/images/categories/joya3.jpg', path: '/products/aros' },
+  { name: 'Pulseras', image: '/images/categories/joya4.jpg', path: '/products/pulseras' },
+  { name: 'Anillos de Matrimonio', image: '/images/categories/joya5.jpg', path: '/products/matrimonio' },
 ];
+
+const loopImages = [...images, ...images];
 
 const CategoryGrid: React.FC = () => {
   return (
-    <div className={styles.container}>
-      <h2>Shop by Category</h2>
-      <p className={styles.description}>
-        Tiffany & Co. designs feature the world’s finest diamonds and unparalleled craftsmanship—
-        signatures of the House for almost two centuries.
-      </p>
-      <div className={styles.grid}>
-        {categories.map((cat, index) => (
-          <div className={styles.item} key={index}>
-            <img src={cat.image} alt={cat.name} />
-            <p>{cat.name}</p>
-          </div>
-        ))}
+    <div className={styles.wrapper}>
+      <h2 className={styles.title}>Encuentra lo que estás buscando</h2>
+      <div className={styles.carouselWrapper}>
+        <div className={styles.carousel}>
+          {loopImages.map((item, idx) => (
+            <Link key={idx} to={item.path} className={styles.link}>
+              <div className={styles.slide}>
+                <img src={item.image} alt={item.name} />
+                <p className={styles.categoryName}>{item.name}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );

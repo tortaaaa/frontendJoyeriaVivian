@@ -11,7 +11,7 @@ import Cart from './presentation/screens/cart/Cart';
 import PaymentData from './presentation/screens/payment/paymentData/PaymentData';
 import PaymentVoucher from './presentation/screens/payment/paymentSuccess/PaymentVoucher';
 import PaymentFail from './presentation/screens/payment/paymentFail/PaymentFail';
-
+import Orfebreria from './presentation/components/Orfebreria';
 const App: React.FC = () => {
   return (
     <Router>
@@ -20,6 +20,7 @@ const App: React.FC = () => {
           <Route path="/" element={<Home />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/information" element={<Information />} />
+          <Route path="/orfebreria" element={<Orfebreria />} />
           <Route path="/product/:product_code" element={<ProductDetail />} />
           <Route path="/products/:category" element={<ProductList />} />
           <Route path="/cart" element={<Cart />} />

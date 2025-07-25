@@ -1,0 +1,31 @@
+.container {
+  background-color: #f9f9f9; /* fondo claro */
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.card {
+  background-color: #ffffff;
+  border: 2px solid #d4af37; /* borde dorado */
+  border-radius: 12px;
+  padding: 2.5rem;
+  max-width: 650px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  color: #d4af37; /* título dorado */
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.text {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 1rem;
+}

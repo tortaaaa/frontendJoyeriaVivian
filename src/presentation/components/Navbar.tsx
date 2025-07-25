@@ -1,11 +1,12 @@
 // src/presentation/components/Navbar.tsx
 
 import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
 import logo from '../../assets/images/pageLogo.png';
 import cartIcon from '../../assets/images/cartIcon.png';
 import { CartContext } from '../context/CartContext'; // Asegúrate de que la ruta sea correcta
-import CartNotification from './CartNotification'; // Importa el componente de notificación
+import CartNotification from './CartNotification';
 
 const Navbar: React.FC = () => {
   const { getTotalItems, notification } = useContext(CartContext) || {};
@@ -42,7 +43,7 @@ const Navbar: React.FC = () => {
           <li><a href="/products/pulseras">Pulseras</a></li>
           <li><a href="/products/colgantes">Colgantes</a></li>
           <li><a href="/products/Joyas para hombres">Hombres</a></li>
-          <li><a href="/">Servicios de Orfebrería</a></li>
+          <li><Link to="/Orfebreria">Servicios de Orfebrería</Link></li>
           <li><a href="/">¿Quiénes Somos?</a></li>
         </ul>
       </nav>

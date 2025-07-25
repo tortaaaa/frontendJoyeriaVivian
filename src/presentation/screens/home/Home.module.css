@@ -1,45 +1,58 @@
+/* GLOBAL */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: sans-serif;
+}
+
+/* CONTENEDOR PRINCIPAL */
 .home {
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   padding: 0;
   margin: 0;
   background-color: #ffffff;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
-/* Sección superior: slider + texto */
+/* SECCIÓN SLIDER + TEXTO */
 .welcome {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
   flex-wrap: wrap;
-  padding: 60px 20px;
+  width: 100%;
   gap: 40px;
 }
 
+/* SLIDERS MÁS GRANDES */
 .slider {
-  position: relative;
-  width: 40%;
+  flex: 1 1 50%;
   min-width: 300px;
-  max-width: 600px;
+  max-width: 900px; /* Aumentado para slider más grande */
 }
 
 .ringImage {
   width: 100%;
-  max-height: 500px;
-  aspect-ratio: 1/1;
+  max-height: 700px; /* Aumentado para slider más alto */
+  aspect-ratio: 1.5 / 1; /* Relación de aspecto más ancha */
   object-fit: cover;
   display: block;
   margin: 0 auto;
   border-radius: 10px;
 }
 
+/* TEXTO */
 .text {
-  flex: 1;
+  flex: 1 1 50%;
   min-width: 300px;
   max-width: 500px;
   font-size: 18px;
@@ -62,39 +75,54 @@
   background-color: #b89542;
 }
 
-/* Segunda sección: texto a la izquierda, imagen/slider a la derecha */
+/* SECCIÓN TEXTO + SLIDER */
 .textSliderSection {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   padding: 60px 20px;
   gap: 40px;
-  flex-wrap: wrap;
 }
 
 .textWrapper {
-  flex: 1;
+  flex: 1 1 50%;
   min-width: 300px;
   max-width: 500px;
   text-align: left;
 }
 
+/* SEGUNDA SECCIÓN SLIDER */
 .sliderWrapper {
-  flex: 1;
+  flex: 1 1 50%;
   min-width: 300px;
-  max-width: 600px;
+  max-width: 900px; /* Aumentado */
 }
 
 .sliderWrapper .ringImage {
   width: 100%;
-  max-height: 500px;
+  max-height: 700px;
   object-fit: cover;
   border-radius: 10px;
   margin: 0 auto;
   display: block;
 }
 
-/* Responsive: columnas se apilan */
+/* IMAGEN ORFEBRE */
+.imagen {
+  flex: 1 1 50%;
+  min-width: 300px;
+  max-width: 900px;
+}
+
+.imagen img {
+  width: 100%;
+  border-radius: 10px;
+  max-height: 700px; /* Aumentado para hacerla más grande */
+  object-fit: cover;
+}
+
+/* RESPONSIVE */
 @media (max-width: 768px) {
   .welcome,
   .textSliderSection {
@@ -103,13 +131,41 @@
   }
 
   .text,
-  .textWrapper {
+  .textWrapper,
+  .slider,
+  .sliderWrapper,
+  .imagen {
+    width: 100%;
+    max-width: 100%;
     text-align: center;
   }
 
-  .slider,
-  .sliderWrapper {
-    width: 100%;
-    max-width: 100%;
+  .textWrapper {
+    padding: 0 10px;
   }
+}
+
+/* Quitar bordes, sombras y contornos del slider react-slick */
+.slick-slider,
+.slick-list,
+.slick-track,
+.slick-slide,
+.slick-arrow,
+.slick-dots li button {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background: none !important;
+}
+
+/* Eliminar border-radius de imágenes si no quieres bordes redondeados */
+.ringImage,
+.sliderWrapper .ringImage,
+.imagen img {
+  border-radius: 0 !important;
+}
+
+/* Opcional: quitar espacio que pudiera generar movimientos laterales */
+.slick-track {
+  margin: 0 auto !important;
 }
