@@ -4,24 +4,17 @@ import styles from './PaymentData.module.css';
 import { FaArrowRight } from 'react-icons/fa';
 import { PaymentUseCase } from '../../../../domain/useCases/payment/PaymentUseCase';
 import { PaymentRepositoryImpl } from '../../../../data/repositories/PaymentRepository';
+import usePaymentViewModel from './ViewModel';
+import RedirectModal from '../../../components/RedirectModal';
+
+const paymentRepository = new PaymentRepositoryImpl();
+const paymentUseCase = new PaymentUseCase(paymentRepository);
 
 const PaymentData: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const paymentRepository = new PaymentRepositoryImpl();
-  const paymentUseCase = new PaymentUseCase(paymentRepository);
-
-  const [paymentData, setPaymentData] = useState({
-    client_name: '',
-    client_rut: '',
-    client_phone: '',
-    client_mail: '',
-    client_region: '',
-    client_city: '',
-    address_name: '',
-    address_number: '',
-    additional_info: ''
-  });
+  
+  const { paymentData, handleChange, validateForm, errors } = usePaymentViewModel();
 
   const [totalAmount, setTotalAmount] = useState<number>(0);
   const [cartItems, setCartItems] = useState<Array<{ product_code: string; quantity: number }>>([]);
@@ -32,30 +25,23 @@ const PaymentData: React.FC = () => {
       setTotalAmount(state.totalAmount);
       setCartItems(state.cartItems);
     } else {
-      navigate('/cart'); // Si no se recibe la información necesaria, redirigir al carrito
+      navigate('/cart');
     }
   }, [location, navigate]);
 
-  const handleBack = () => {
-    navigate(-1); // Regresa a la pantalla anterior
-  };
+  const handleBack = () => navigate(-1);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setPaymentData(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
-  };
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
   const handlePayment = async () => {
+    if (!validateForm()) return;
+
+    const dataToSend = { ...paymentData, total_amount: totalAmount, cart_items: cartItems };
+
     try {
-      const dataToSend = { ...paymentData, total_amount: totalAmount, cart_items: cartItems };
-
+      setIsRedirecting(true);  
       const response = await paymentUseCase.initiateTransaction(dataToSend);
-      console.log('Transacción iniciada', response);
 
-      // Crear un formulario dinámico y enviarlo a Webpay
       const form = document.createElement('form');
       form.method = 'POST';
       form.action = response.url;
@@ -64,21 +50,16 @@ const PaymentData: React.FC = () => {
       tokenInput.type = 'hidden';
       tokenInput.name = 'token_ws';
       tokenInput.value = response.token;
-
       form.appendChild(tokenInput);
       document.body.appendChild(form);
 
-      form.submit(); // Enviar el formulario
-
-      // Guardar el sale_code en el estado de navegación para utilizarlo en PaymentVoucher
-      navigate(`/payment-voucher?sale_code=${response.buy_order}`);
-
+      form.submit();
+      //navigate(`/payment-voucher?sale_code=${response.buy_order}`);
     } catch (error) {
-      console.error('Error al iniciar la transacción', error);
+      setIsRedirecting(false);
+      console.error('Error al iniciar la transacción:', error);
       navigate('/payment-fail', {
-        state: {
-          message: 'No se pudo iniciar la transacción. Por favor, inténtelo nuevamente.',
-        },
+        state: { message: 'No se pudo iniciar la transacción. Por favor, inténtelo nuevamente.' },
       });
     }
   };
@@ -96,27 +77,48 @@ const PaymentData: React.FC = () => {
           <span>COMPROBANTE</span>
         </div>
       </div>
+
       <div className={styles.back}>
         <button onClick={handleBack} className={styles.backButton}>
           <span>&#9664; Volver</span>
         </button>
       </div>
+
       <h2>Información de Envío</h2>
+
       <div className={styles.form}>
         <input type="text" placeholder="Nombre y Apellido" name="client_name" className={styles.inputField} onChange={handleChange} />
+        {errors.client_name && <span className={styles.error}>{errors.client_name}</span>}
+
         <input type="text" placeholder="RUT" name="client_rut" className={styles.inputField} onChange={handleChange} />
+        {errors.client_rut && <span className={styles.error}>{errors.client_rut}</span>}
+
         <input type="text" placeholder="Número de teléfono" name="client_phone" className={styles.inputField} onChange={handleChange} />
+        {errors.client_phone && <span className={styles.error}>{errors.client_phone}</span>}
+
         <input type="email" placeholder="Correo" name="client_mail" className={styles.inputField} onChange={handleChange} />
+        {errors.client_mail && <span className={styles.error}>{errors.client_mail}</span>}
+
         <input type="text" placeholder="Región" name="client_region" className={styles.inputField} onChange={handleChange} />
+        {errors.client_region && <span className={styles.error}>{errors.client_region}</span>}
+
         <input type="text" placeholder="Ciudad" name="client_city" className={styles.inputField} onChange={handleChange} />
+        {errors.client_city && <span className={styles.error}>{errors.client_city}</span>}
+
         <input type="text" placeholder="Nombre de Dirección" name="address_name" className={styles.inputField} onChange={handleChange} />
+        {errors.address_name && <span className={styles.error}>{errors.address_name}</span>}
+
         <input type="text" placeholder="Número de Dirección" name="address_number" className={styles.inputField} onChange={handleChange} />
+        {errors.address_number && <span className={styles.error}>{errors.address_number}</span>}
+
         <textarea placeholder="Información adicional" name="additional_info" className={styles.textAreaField} onChange={handleChange}></textarea>
       </div>
+
       <div className={styles.paymentSection}>
         <h3>Continuar al pago</h3>
         <button onClick={handlePayment} className={styles.paymentButton}>Pagar</button>
       </div>
+      <RedirectModal isOpen={isRedirecting}/>
     </div>
   );
 };
