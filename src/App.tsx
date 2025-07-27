@@ -12,23 +12,36 @@ import PaymentData from './presentation/screens/payment/paymentData/PaymentData'
 import PaymentVoucher from './presentation/screens/payment/paymentSuccess/PaymentVoucher';
 import PaymentFail from './presentation/screens/payment/paymentFail/PaymentFail';
 import Orfebreria from './presentation/components/Orfebreria';
+
+import TransbankLogin from './presentation/screens/transbankLogin/TransbankLogin';
+import PrivateRoute from './presentation/components/PrivateRoute';
+
 const App: React.FC = () => {
   return (
     <Router>
-      <MainLayout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/information" element={<Information />} />
-          <Route path="/orfebreria" element={<Orfebreria />} />
-          <Route path="/product/:product_code" element={<ProductDetail />} />
-          <Route path="/products/:category" element={<ProductList />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/payment-data" element={<PaymentData />} />
-          <Route path="/payment-voucher" element={<PaymentVoucher />} /> {/* Ruta para PaymentVoucher */}
-          <Route path="/payment-fail" element={<PaymentFail />} /> {/* Ruta para PaymentFail */}
-        </Routes>
-      </MainLayout>
+      <Routes>
+        {/* RUTA DE LOGIN DE TRANSBANK */}
+        <Route path="/transbank-login" element={<TransbankLogin />} />
+        {/* TODAS LAS DEMÁS PROTEGIDAS */}
+        <Route path="/*" element={
+          <PrivateRoute>
+            <MainLayout>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/information" element={<Information />} />
+                <Route path="/orfebreria" element={<Orfebreria />} />
+                <Route path="/product/:product_code" element={<ProductDetail />} />
+                <Route path="/products/:category" element={<ProductList />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/payment-data" element={<PaymentData />} />
+                <Route path="/payment-voucher" element={<PaymentVoucher />} />
+                <Route path="/payment-fail" element={<PaymentFail />} />
+              </Routes>
+            </MainLayout>
+          </PrivateRoute>
+        } />
+      </Routes>
     </Router>
   );
 };
