@@ -1,4 +1,3 @@
-// src/App.tsx
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MainLayout from './presentation/layouts/MainLayout';
@@ -16,13 +15,39 @@ import Orfebreria from './presentation/components/Orfebreria';
 import TransbankLogin from './presentation/screens/transbankLogin/TransbankLogin';
 import PrivateRoute from './presentation/components/PrivateRoute';
 
+import CmsLogin from './presentation/screens/cms/LoginCMS/CmsLogin';
+import PrivateRouteCMS from './presentation/components/PrivateRouteCMS';
+import CmsLayout from './presentation/layouts/CmsLayout';
+import Dashboard from './presentation/screens/cms/Dashboard/Dashboard';
+import ViewProducts from './presentation/screens/cms/Products/View/ViewProducts';
+import CreateProduct from './presentation/screens/cms/Products/Create/CreateProduct';
+import EditProduct from './presentation/screens/cms/Products/Edit/EditProduct';
+
 const App: React.FC = () => {
   return (
     <Router>
       <Routes>
-        {/* RUTA DE LOGIN DE TRANSBANK */}
+        {/* Login Transbank (página pública) */}
         <Route path="/transbank-login" element={<TransbankLogin />} />
-        {/* TODAS LAS DEMÁS PROTEGIDAS */}
+
+        {/* Login CMS (página pública) */}
+        <Route path="/cms/login" element={<CmsLogin />} />
+
+        {/* RUTAS PRIVADAS CMS */}
+        <Route path="/cms/*" element={
+          <PrivateRouteCMS>
+            <CmsLayout>
+              <Routes>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/products" element={<ViewProducts />} />
+                <Route path="/products/create" element={<CreateProduct />} />
+                <Route path="/products/edit/:product_code" element={<EditProduct />} />
+              </Routes>
+            </CmsLayout>
+          </PrivateRouteCMS>
+        } />
+
+        {/* RUTAS PRIVADAS TRANSBANK */}
         <Route path="/*" element={
           <PrivateRoute>
             <MainLayout>

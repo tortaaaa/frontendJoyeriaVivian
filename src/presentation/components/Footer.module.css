@@ -68,4 +68,23 @@ color:#f7f141
   .footer p {
     font-size: 14px; /* Reduce el tamaño de la fuente en pantallas pequeñas */
   }
+  .cmsButton {
+  background: transparent;
+  color: #b8b8b8;
+  font-size: 0.98rem;
+  border: none;
+  margin: 0 12px;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.15s, color 0.15s;
+  opacity: 0.6;
+}
+.cmsButton:hover,
+.cmsButton:focus {
+  background: #f5f5f5;
+  color: #d6b469;
+  opacity: 1;
+}
+
 }

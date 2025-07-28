@@ -1,0 +1,96 @@
+import React from 'react';
+import styles from './CreateProduct.module.css';
+import { useViewModel } from './ViewModel';
+
+const CreateProduct: React.FC = () => {
+  const { product, setProduct, handleSubmit, loading, error } = useViewModel();
+  const isEdit = false;
+
+  return (
+    <div className={styles.container}>
+      <h2>Crear Nuevo Producto</h2>
+        <form className={styles.form} onSubmit={handleSubmit}>
+        <input type="text" placeholder="Código" value={product.product_code}
+            onChange={e => setProduct({ ...product, product_code: e.target.value })} required disabled={isEdit} />
+        
+        <input type="text" placeholder="Nombre" value={product.name}
+            onChange={e => setProduct({ ...product, name: e.target.value })} required />
+        
+        <input type="text" placeholder="Categoría" value={product.category}
+            onChange={e => setProduct({ ...product, category: e.target.value })} required />
+
+        <input type="number" placeholder="Precio" value={product.price}
+            onChange={e => setProduct({ ...product, price: Number(e.target.value) })} required />
+
+        <input type="number" placeholder="Stock" value={product.stock}
+            onChange={e => setProduct({ ...product, stock: Number(e.target.value) })} required />
+
+        <textarea placeholder="Descripción" value={product.description}
+            onChange={e => setProduct({ ...product, description: e.target.value })} />
+
+        <input type="number" step="0.01" placeholder="Peso" value={product.weight}
+            onChange={e => setProduct({ ...product, weight: Number(e.target.value) })} />
+
+        <input type="text" placeholder="Material" value={product.material}
+            onChange={e => setProduct({ ...product, material: e.target.value })} />
+
+        <input type="text" placeholder="Tipo de Gema" value={product.gemstone_type}
+            onChange={e => setProduct({ ...product, gemstone_type: e.target.value })} />
+
+        <input type="number" step="0.01" placeholder="Tamaño de Gema" value={product.gemstone_size}
+            onChange={e => setProduct({ ...product, gemstone_size: Number(e.target.value) })} />
+
+        <label>
+            <input type="checkbox" checked={product.is_wedding}
+            onChange={e => setProduct({ ...product, is_wedding: e.target.checked })} />
+            ¿Es para matrimonio?
+        </label>
+
+        <label>
+            <input type="checkbox" checked={product.is_baby}
+            onChange={e => setProduct({ ...product, is_baby: e.target.checked })} />
+            ¿Es para bebé?
+        </label>
+
+        <label>
+            <input type="checkbox" checked={product.is_men}
+            onChange={e => setProduct({ ...product, is_men: e.target.checked })} />
+            ¿Es para hombres?
+        </label>
+
+        <button type="submit" disabled={loading}>
+            {loading ? "Guardando..." : isEdit ? "Actualizar Producto" : "Crear Producto"}
+        </button>
+        {error && <p className={styles.error}>{error}</p>}
+
+        <div className={styles.imageUploader}>
+  <button type="button" onClick={() => window.cloudinary.openUploadWidget({
+      cloudName: 'tu-cloud-name',
+      uploadPreset: 'tu-upload-preset',
+      multiple: true,
+      sources: ['local', 'url', 'camera'],
+    }, (error: any, result: any) => {
+      if (!error && result && result.event === "success") {
+        setProduct(prev => ({
+          ...prev,
+          images: [...prev.images, result.info.secure_url]
+        }));
+      }
+    })}>
+    Subir imágenes del producto
+  </button>
+
+  <div className={styles.imagePreview}>
+    {product.images.map((url, index) => (
+      <img key={index} src={url} alt={`producto ${index}`} />
+    ))}
+  </div>
+</div>
+
+        </form>
+
+    </div>
+  );
+};
+
+export default CreateProduct;

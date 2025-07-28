@@ -1,0 +1,30 @@
+.container {
+  padding: 2rem;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table th, .table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+.button, .buttonEdit, .buttonActivate {
+  padding: 0.5rem 1rem;
+  margin-right: 0.5rem;
+  text-decoration: none;
+  color: white;
+  background-color: #D6B469;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.buttonActivate {
+  background-color: #888;
+}
+.error {
+  color: red;
+}
+.info {
+  color: gray;
+}
