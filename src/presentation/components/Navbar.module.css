@@ -12,18 +12,9 @@
 .logo {
   height: 70px;
 }
-
-.searchInput {
-  flex-grow: 1;
-  margin: 0 20px 0 auto; /* Margin-left auto para empujar el input hacia la derecha */
-  padding: 5px 10px;
-  border: 1px solid #D6B469; /* Color del borde similar al dorado del mockup */
-  background-color: #FFF; /* Fondo blanco */
-  border-radius: 5px; /* Bordes redondeados */
-  max-width: 300px; /* Ajusta el ancho máximo según sea necesario */
-  color: #000;
+.flexSpacer {
+  flex: 1;
 }
-
 .cartLink {
   position: relative;
 }

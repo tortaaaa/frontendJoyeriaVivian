@@ -7,7 +7,7 @@ import logo from '../../assets/images/pageLogo.png';
 import cartIcon from '../../assets/images/cartIcon.png';
 import { CartContext } from '../context/CartContext'; // Asegúrate de que la ruta sea correcta
 import CartNotification from './CartNotification';
-
+import ProductSearch from '../components/ProductSearch'
 const Navbar: React.FC = () => {
   const { getTotalItems, notification } = useContext(CartContext) || {};
   const totalItems = getTotalItems ? getTotalItems() : 0;
@@ -24,7 +24,8 @@ const Navbar: React.FC = () => {
         <a href="/">
           <img src={logo} alt="Joyería Vivian" className={styles.logo} />
         </a>
-        <input type="text" placeholder="Buscar producto" className={styles.searchInput} />
+        <div className={styles.flexSpacer} />
+        <ProductSearch />
         <a href="/cart" className={styles.cartLink}>
           <img src={cartIcon} alt="Carrito" className={styles.cartIcon} />
           {totalItems > 0 && <span className={styles.cartBadge}>{totalItems}</span>}

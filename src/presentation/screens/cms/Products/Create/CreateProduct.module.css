@@ -1,0 +1,38 @@
+.container {
+  padding: 2rem;
+}
+.form input {
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+button {
+  padding: 0.5rem 1rem;
+  background: #D6B469;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+.error {
+  color: red;
+}
+.imageUploader button {
+  padding: 0.6rem;
+  background-color: #D6B469;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 1rem;
+}
+
+.imagePreview img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-right: 8px;
+  border-radius: 6px;
+  margin-top: 1rem;
+}
+

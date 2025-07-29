@@ -1,12 +1,14 @@
 import React from 'react';
-import { FaMapMarkerAlt } from 'react-icons/fa'; // Importa el ícono de ubicación
+import { FaMapMarkerAlt } from 'react-icons/fa';
 import styles from './Footer.module.css';
 
 const Footer: React.FC = () => {
-
   const handleContactClick = () => {
-    // Cambia la URL para que la página se recargue completamente
     window.location.href = '/contact';
+  };
+
+  const handleCmsLoginClick = () => {
+    window.location.href = '/cms/login';
   };
 
   return (
@@ -16,13 +18,24 @@ const Footer: React.FC = () => {
           Contáctanos
         </button>
       </div>
+      <div className={styles.center}>
+        {/* BOTÓN CMS: Puedes dejarlo chico o camuflado */}
+        <button
+          className={styles.cmsButton}
+          onClick={handleCmsLoginClick}
+          title="Solo para administradores"
+        >
+          Acceso CMS
+        </button>
+      </div>
       <div className={styles.right}>
-        <p>&copy; 2024 Joyería Vivian<br />
+        <p>
+          &copy; 2024 Joyería Vivian<br />
           Manuel Antonio Matta 2325, Antofagasta
-          <a 
-            href="https://maps.app.goo.gl/SzV3S7oNLHZhnS5E9" 
-            target="_blank" 
-            rel="noopener noreferrer" 
+          <a
+            href="https://maps.app.goo.gl/SzV3S7oNLHZhnS5E9"
+            target="_blank"
+            rel="noopener noreferrer"
             className={styles.locationLink}
           >
             <FaMapMarkerAlt className={styles.locationIcon} />

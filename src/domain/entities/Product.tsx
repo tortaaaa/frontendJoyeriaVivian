@@ -1,5 +1,6 @@
 // Product.tsx
 export interface Product {
+  activated: any;
   product_code: string;  // "P001" (nuevo PK)
   name: string;          // nombre del producto
   category: string;      // tipo de producto (pulsera, colgante, anillo, etc)
