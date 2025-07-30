@@ -19,14 +19,6 @@ const Footer: React.FC = () => {
         </button>
       </div>
       <div className={styles.center}>
-        {/* BOTÓN CMS: Puedes dejarlo chico o camuflado */}
-        <button
-          className={styles.cmsButton}
-          onClick={handleCmsLoginClick}
-          title="Solo para administradores"
-        >
-          Acceso CMS
-        </button>
       </div>
       <div className={styles.right}>
         <p>

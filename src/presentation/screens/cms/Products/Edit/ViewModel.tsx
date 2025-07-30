@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ProductCrud } from '../../../../../domain/useCases/product/ProductCrud';
 import { useNavigate } from 'react-router-dom';
 import { Product } from '../../../../../domain/entities/Product';
-import api from '../../../../../data/sources/api/apiJoyeriaVivian';
 
 export const useViewModel = (product_code: string) => {
   const navigate = useNavigate();
+
   const [product, setProduct] = useState<Product>({
     activated: true,
     product_code: "",
@@ -23,8 +23,10 @@ export const useViewModel = (product_code: string) => {
     is_men: false,
     images: [],
   });
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [initialImages, setInitialImages] = useState<string[]>([]); // Para comparar al guardar
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -32,56 +34,55 @@ export const useViewModel = (product_code: string) => {
       try {
         const prod = await ProductCrud.getProduct(product_code);
         setProduct(prod);
+        setInitialImages(prod.images || []);
       } catch {
         setError("Error al cargar datos del producto.");
       } finally {
         setLoading(false);
       }
     };
-
     fetchProduct();
   }, [product_code]);
 
-  // Eliminar una imagen por URL (tanto en backend como frontend)
-  const handleDeleteImage = async (url: string) => {
-    try {
-      // 1. Busca el ID de la imagen en backend (puedes mejorar esto si backend permite borrar por URL directa)
-      await api.delete(`/api/images/`, { data: { product: product_code, url } }); // <-- REQUIERE endpoint que acepte esto
-      // 2. Actualiza el estado para quitar la imagen
-      setProduct(prev => ({
-        ...prev,
-        images: prev.images.filter(img => img !== url)
-      }));
-    } catch {
-      setError("Error al eliminar la imagen.");
-    }
+  // Quitar imagen solo en frontend
+  const handleRemoveImage = (url: string) => {
+    setProduct(prev => ({
+      ...prev,
+      images: prev.images.filter(img => img !== url)
+    }));
   };
 
+  // Guardar cambios en backend (sólo en “Actualizar Producto”)
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     try {
-      // 1. Actualizar producto (sin las imágenes)
-      await ProductCrud.update(product_code, {
-        ...product,
-        images: [], // No enviar imágenes aquí
-      });
-      // 2. Subir nuevas imágenes (por cada URL de Cloudinary)
+      // 1. Actualizar datos del producto (sin tocar imágenes)
+      await ProductCrud.update(product_code, { ...product, images: [] });
+
+      // 2. Eliminar imágenes que ya no están
+      const imagesToDelete = initialImages.filter(img => !product.images.includes(img));
       await Promise.all(
-        product.images.map(async (imgUrl) => {
-          await api.post('/api/images/', {
-            product: product_code,
-            url: imgUrl,
-          });
-        })
+        imagesToDelete.map(async (imgUrl) =>
+          await ProductCrud.deleteImage(product_code, imgUrl)
+        )
       );
+
+      // 3. Subir imágenes nuevas que no existían antes
+      const imagesToAdd = product.images.filter(img => !initialImages.includes(img));
+      await Promise.all(
+        imagesToAdd.map(async (imgUrl) =>
+          await ProductCrud.addImage(product_code, imgUrl)
+        )
+      );
+
       navigate("/cms/products");
-    } catch {
+    } catch (err) {
       setError("Error al actualizar el producto.");
     } finally {
       setLoading(false);
     }
   };
 
-  return { product, setProduct, handleSubmit, loading, error, handleDeleteImage };
+  return { product, setProduct, handleSubmit, loading, error, handleRemoveImage };
 };
