@@ -15,8 +15,13 @@
     "axios": "^1.7.3",
     "emailjs-com": "^3.2.0",
     "formik": "^2.4.6",
+    "html2canvas": "^1.4.1",
+    "html2pdf.js": "^0.10.3",
+    "jspdf": "^3.0.1",
+    "lodash.debounce": "^4.0.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-feather": "^2.0.10",
     "react-icons": "^5.2.1",
     "react-modal": "^3.16.1",
     "react-phone-input-2": "^2.15.1",
@@ -27,6 +32,8 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
+    "@types/lodash.debounce": "^4.0.9",
+    "@types/node": "^24.1.0",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@types/react-router-dom": "^5.3.3",

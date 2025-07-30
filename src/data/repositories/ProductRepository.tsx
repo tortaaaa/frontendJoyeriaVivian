@@ -87,4 +87,18 @@ export class ProductRepositoryImpl implements ProductRepository {
         // Usa el endpoint delete_by_url que espera product_code y url
         await api.delete(`/api/images/delete_by_url/?product=${product_code}&url=${encodeURIComponent(url)}`);
     }
+        async createProduct(productData: Product): Promise<Product> {
+        const response = await api.post(`/api/products/`, productData);
+        return response.data;
+    }
+
+    async updateProduct(product_code: string, productData: Product): Promise<Product> {
+        const response = await api.put(`/api/products/${product_code}/`, productData);
+        return response.data;
+    }
+
+    async toggleActivateProduct(product_code: string): Promise<{ activated: boolean }> {
+        const response = await api.delete(`/api/products/${product_code}/`);
+        return response.data;
+    }
 }

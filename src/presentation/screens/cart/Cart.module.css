@@ -71,6 +71,7 @@
 .cartItemDetails h4 {
   font-weight: normal; /* Cambia a una fuente que no esté en negrita */
   margin-bottom: -15px;
+  cursor: pointer;
   color: black;
 }
 

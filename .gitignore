@@ -1,0 +1,16 @@
+# node_modules
+node_modules/
+
+# output
+dist/
+build/
+.vite/
+.next/
+out/
+coverage/
+*.log
+*.map
+
+# OS files
+.DS_Store
+Thumbs.db

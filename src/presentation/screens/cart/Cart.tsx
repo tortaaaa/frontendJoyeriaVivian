@@ -94,7 +94,10 @@ const Cart: React.FC = () => {
                   <img src={item.images[0]} alt={`Producto ${item.product_code}`} className={styles.cartItemImage} />
                   <div className={styles.cartItemDetails}>
                     <h4>Código de producto: {item.product_code}</h4>
-                    <h2>{item.name}</h2>
+                    <h2 
+                      onClick={() => navigate(`/product/${item.product_code}`)}
+                      title="Ver detalles del producto"
+                    >{item.name}</h2>
                     <h4>{item.description}</h4>
                     <h4>${item.price.toLocaleString()} CLP</h4>
                     {item.stock < 1 && <p className={styles.outOfStock}>Producto sin stock</p>}
