@@ -105,6 +105,7 @@
   color: rgb(0, 0, 0);
   border-radius: 10px;
   transition: transform 0.2s; /* Añade una transición para el efecto hover */
+  cursor: pointer;
 }
 
 .productCard:hover {
