@@ -51,11 +51,12 @@ const ProductDetail: React.FC = () => {
   if (!product) return <p>Producto no encontrado.</p>;
 
   const isOutOfStock = product.stock === 0;
+  const hasMultipleImages = product.images.length > 1;
 
   return (
     <div className={styles.productDetail}>
       <div className={styles.imageSection}>
-        {product.images.length > 1 ? (
+        {hasMultipleImages ? (
           <>
             <Slider ref={sliderRef} {...sliderSettings} className={styles.slider}>
               {product.images.map((image, index) => (

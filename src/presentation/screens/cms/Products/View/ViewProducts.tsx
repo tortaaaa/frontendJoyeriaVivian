@@ -12,36 +12,49 @@ const ViewProducts: React.FC = () => {
   return (
     <div className={styles.container}>
       <h2>Lista de Productos</h2>
-      <Link to="/cms/products/create" className={styles.button}>Crear Producto</Link>
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th>Código</th>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Activo</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {products.map(p => (
-            <tr key={p.product_code}>
-              <td>{p.product_code}</td>
-              <td>{p.name}</td>
-              <td>{p.price}</td>
-              <td>{p.activated ? "Sí" : "No"}</td>
-              <td>
-                <Link to={`/cms/products/edit/${p.product_code}`} className={styles.buttonEdit}>Editar</Link>
-                <button
-                  onClick={() => toggleActivation(p.product_code)}
-                  className={styles.buttonActivate}>
-                  {p.activated ? "Desactivar" : "Activar"}
-                </button>
-              </td>
+      <div className={styles.headerBar}>
+        <Link to="/cms/products/create" className={styles.buttonPrimary}>+ Crear Producto</Link>
+      </div>
+      <div className={styles.tableContainer}>
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Nombre</th>
+              <th>Precio</th>
+              <th>Activo</th>
+              <th>Acciones</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {products.map(p => (
+              <tr key={p.product_code}>
+                <td>{p.product_code}</td>
+                <td>{p.name}</td>
+                <td>${p.price}</td>
+                <td>
+                  <span className={p.activated ? styles.active : styles.inactive}>
+                    {p.activated ? "Sí" : "No"}
+                  </span>
+                </td>
+                <td>
+                  <Link
+                    to={`/cms/products/edit/${p.product_code}`}
+                    className={styles.buttonEdit}>
+                    Editar
+                  </Link>
+                  <button
+                    onClick={() => toggleActivation(p.product_code)}
+                    className={styles.buttonToggle}
+                  >
+                    {p.activated ? "Desactivar" : "Activar"}
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

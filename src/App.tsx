@@ -22,8 +22,6 @@ import Dashboard from './presentation/screens/cms/Dashboard/Dashboard';
 import ViewProducts from './presentation/screens/cms/Products/View/ViewProducts';
 import CreateProduct from './presentation/screens/cms/Products/Create/CreateProduct';
 import EditProduct from './presentation/screens/cms/Products/Edit/EditProduct';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 
 const App: React.FC = () => {
   return (
