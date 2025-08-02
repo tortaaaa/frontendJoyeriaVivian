@@ -111,6 +111,7 @@
   text-align: center;
   color: rgb(0, 0, 0);
   border-radius: 10px;
+  cursor: pointer;
   transition: transform 0.2s; /* Añade una transición para el efecto hover */
 }
 

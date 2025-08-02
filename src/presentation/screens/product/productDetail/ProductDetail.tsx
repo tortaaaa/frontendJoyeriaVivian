@@ -7,16 +7,16 @@ import styles from './ProductDetail.module.css';
 import { sliderSettings, getProductDetail } from './ViewModel';
 import { CartContext } from '../../../context/CartContext';
 import { Product } from '../../../../domain/entities/Product';
-import Spinner from '../../../components/Spinner'; // Importa el componente Spinner
+import Spinner from '../../../components/Spinner';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const ProductDetail: React.FC = () => {
-  const { product_code: product_code } = useParams<{ product_code: string }>(); // Usamos `product_code` en lugar de `id`
+  const { product_code } = useParams<{ product_code: string }>();
   const { addToCart } = React.useContext(CartContext) || {};
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  
-  // Definimos el ref para el Slider
   const sliderRef = useRef<Slider>(null);
 
   useEffect(() => {
@@ -26,12 +26,11 @@ const ProductDetail: React.FC = () => {
         setProduct(fetchedProduct);
       } catch (error) {
         console.error('[ERROR] Fallo al cargar el producto:', error);
-        setError('Failed to load product');
+        setError('Error al cargar el producto');
       } finally {
         setLoading(false);
       }
     };
-
     fetchProduct();
   }, [product_code]);
 
@@ -52,29 +51,46 @@ const ProductDetail: React.FC = () => {
   if (!product) return <p>Producto no encontrado.</p>;
 
   const isOutOfStock = product.stock === 0;
+  const hasMultipleImages = product.images.length > 1;
 
   return (
     <div className={styles.productDetail}>
       <div className={styles.imageSection}>
-        <Slider ref={sliderRef} {...sliderSettings} className={styles.slider}>
-          {product.images.map((image, index) => (
-            <div key={index}>
-              <img src={image} alt={product.name} className={styles.productImage} />
+        {hasMultipleImages ? (
+          <>
+            <Slider ref={sliderRef} {...sliderSettings} className={styles.slider}>
+              {product.images.map((image, index) => (
+                <div key={index}>
+                  <img
+                    src={image}
+                    alt={product.name}
+                    className={styles.productImage}
+                  />
+                </div>
+              ))}
+            </Slider>
+
+            <div className={styles.thumbnailContainer}>
+              {product.images.map((image, index) => (
+                <img
+                  key={index}
+                  src={image}
+                  alt={`Thumbnail ${index + 1}`}
+                  className={styles.thumbnail}
+                  onClick={() => handleThumbnailClick(index)}
+                />
+              ))}
             </div>
-          ))}
-        </Slider>
-        <div className={styles.thumbnailContainer}>
-          {product.images.map((image, index) => (
-            <img
-              key={index}
-              src={image}
-              alt={`Thumbnail ${index + 1}`}
-              className={styles.thumbnail}
-              onClick={() => handleThumbnailClick(index)}
-            />
-          ))}
-        </div>
+          </>
+        ) : (
+          <img
+            src={product.images[0]}
+            alt={product.name}
+            className={styles.productImage}
+          />
+        )}
       </div>
+
       <div className={styles.infoSection}>
         <h1>{product.name}</h1>
         <h2>Modelo {product.product_code}</h2>
@@ -82,14 +98,15 @@ const ProductDetail: React.FC = () => {
         <p className={styles.price}>${product.price.toLocaleString()} CLP</p>
         {isOutOfStock && <p className={styles.outOfStockMessage}>Agotado</p>}
         <div className={styles.buttonContainer}>
-          <button 
-            className={`${styles.buyButton} ${isOutOfStock ? styles.disabled : ''}`} 
+          <button
+            className={`${styles.buyButton} ${isOutOfStock ? styles.disabled : ''}`}
             disabled={isOutOfStock}
+            onClick={handleAddToCart}
           >
             Compra Ya
           </button>
-          <button 
-            className={`${styles.cartButton} ${isOutOfStock ? styles.disabled : ''}`} 
+          <button
+            className={`${styles.cartButton} ${isOutOfStock ? styles.disabled : ''}`}
             onClick={handleAddToCart}
             disabled={isOutOfStock}
           >
