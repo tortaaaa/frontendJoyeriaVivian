@@ -27,6 +27,8 @@
 .input {
   padding: 0.7rem 1rem;
   border: 1.5px solid #d6b469;
+  color: black;
+  background-color: #fffaee;
   border-radius: 6px;
   font-size: 1rem;
 }

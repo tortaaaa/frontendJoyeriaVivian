@@ -9,12 +9,16 @@
 }
 
 .hamburger {
-  display: none; /* Ocultar el botón de hamburguesa en pantallas grandes */
-  background: none;
+  display: none;
+  background: #D6B469;        /* negro */
+  color: #fff;             /* icono blanco */
   border: none;
-  font-size: 24px;
+  font-size: 2rem;
   cursor: pointer;
   margin-bottom: 10px;
+  border-radius: 12px;
+  padding: 12px 20px;
+  transition: background 0.18s;
 }
 
 .filters {
@@ -83,6 +87,9 @@
   margin-top: -20px;
   margin-bottom: 20px;
   color: black;
+  font-size: 2.8rem;
+  font-weight: 700;
+  word-break: break-word;
 }
 
 .productGrid {
@@ -214,17 +221,102 @@
   justify-content: center;
   align-items: center;
   border-radius: 5px; /* Para redondear esquinas si es necesario */
+
 }
+.noProductsMessage {
+  text-align: center;
+  grid-column: 1 / -1;
+  color: #888;
+  font-size: 1.2rem;
+  margin: 50px 0;
+  background: #f8f8f8;
+  border-radius: 12px;
+  padding: 40px 0;
+}
+
+.errorMsg {
+  color: #c03030;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  background: #ffeaea;
+  padding: 15px;
+  border-radius: 8px;
+}
+.filtersClose {
+  display: none;  /* por defecto, oculto */
+}
+
 /* Media query para pantallas medianas y pequeñas */
 @media (max-width: 1200px) {
   .productGrid {
     grid-template-columns: repeat(2, 1fr); /* Cambia a 2 columnas en pantallas medianas */
   }
+    .products h1 {
+    font-size: 2.1rem;
+    margin-top: 0;
+    margin-bottom: 14px;
+  }
 }
 
 @media (max-width: 768px) {
+    .products h1 {
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    line-height: 1.18;
+  }
   .filters {
-    display: none; /* Ocultar el contenedor de filtros en pantallas pequeñas */
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 80vw;
+    max-width: 330px;
+    height: 100vh;
+    background: #fff;
+    z-index: 1001;
+    margin: 0;
+    padding: 32px 20px 20px 20px;
+    box-shadow: 2px 0 18px rgba(0,0,0,0.18);
+    border-radius: 0 18px 18px 0;
+    transform: translateX(-100%);
+    transition: transform 0.35s cubic-bezier(.77,.2,.05,1.0);
+  }
+  .filters.show {
+    display: block !important;
+    transform: translateX(0);
+  }
+
+  .filtersClose {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #666;
+    position: absolute;
+    right: 18px;
+    top: 18px;
+    z-index: 2001;
+    cursor: pointer;
+  }
+
+  .filtersOverlay {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.36);
+    transition: opacity 0.3s;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .filtersOverlay.show {
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .hamburger {
@@ -270,5 +362,9 @@
     align-items: center;
     border-radius: 5px; /* Para redondear esquinas si es necesario */
   }
+    .container {
+    padding: 10px 2vw;
+  }
+
 }
 

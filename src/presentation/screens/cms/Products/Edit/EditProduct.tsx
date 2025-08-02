@@ -3,13 +3,20 @@ import { useParams } from 'react-router-dom';
 import styles from './EditProduct.module.css';
 import { useViewModel } from './ViewModel';
 
+const CATEGORIES = [
+  { label: "Anillos", value: "ring" },
+  { label: "Pulseras", value: "bracelet" },
+  { label: "Aros", value: "earring" },
+  { label: "Cadenas", value: "chain" },
+  { label: "Colgantes", value: "pendant" },
+  { label: "Aros de Bebé", value: "baby earring" },
+];
 const EditProduct: React.FC = () => {
   const { product_code } = useParams();
   const { product, setProduct, handleSubmit, loading, error, handleRemoveImage } = useViewModel(product_code!);
   const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;   
   const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
   const isEdit = true;
-
   return (
     <div className={styles.container}>
       <h2>Editar Producto</h2>
@@ -24,11 +31,21 @@ const EditProduct: React.FC = () => {
           <input id="nombre" type="text" value={product.name}
             onChange={e => setProduct({ ...product, name: e.target.value })} required />
         </div>
-        <div className={styles.inputGroup}>
-          <label htmlFor="categoria">Categoría</label>
-          <input id="categoria" type="text" value={product.category}
-            onChange={e => setProduct({ ...product, category: e.target.value })} required />
-        </div>
+<div className={styles.inputGroup}>
+  <label htmlFor="categoria">Categoría</label>
+  <select
+    id="categoria"
+    value={product.category}
+    onChange={e => setProduct({ ...product, category: e.target.value })}
+    required
+  >
+    <option value="">Selecciona una categoría</option>
+    {CATEGORIES.map(cat => (
+      <option key={cat.value} value={cat.value}>{cat.label}</option>
+    ))}
+  </select>
+</div>
+
         <div className={styles.inputGroup}>
           <label htmlFor="precio">Precio</label>
           <input id="precio" type="number" value={product.price}
@@ -72,11 +89,6 @@ const EditProduct: React.FC = () => {
           </label>
         </div>
         <div className={styles.inputGroup}>
-          <label>
-            <input type="checkbox" checked={product.is_baby}
-              onChange={e => setProduct({ ...product, is_baby: e.target.checked })} />
-            ¿Es para bebé?
-          </label>
         </div>
         <div className={styles.inputGroup}>
           <label>

@@ -1,5 +1,5 @@
 // src/domain/useCases/payment/PaymentUseCase.ts
-import { PaymentRepository } from '../../../data/repositories/PaymentRepository';
+import { PaymentRepository, Sale } from '../../../data/repositories/PaymentRepository';
 
 export class PaymentUseCase {
     private paymentRepository: PaymentRepository;
@@ -9,12 +9,14 @@ export class PaymentUseCase {
     }
 
     async initiateTransaction(paymentData: any) {
-        try {
-            const response = await this.paymentRepository.initiateTransaction(paymentData);
-            return response;
-        } catch (error) {
-            console.error('[ERROR] Error al iniciar la transacción:', error);
-            throw error;
-        }
+        return await this.paymentRepository.initiateTransaction(paymentData);
+    }
+
+    async fetchSales(): Promise<Sale[]> {
+        return await this.paymentRepository.fetchSales();
+    }
+
+    async updateSaleStatus(sale_code: string, status: Sale['status']) {
+        return await this.paymentRepository.updateSaleStatus(sale_code, status);
     }
 }

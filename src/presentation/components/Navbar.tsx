@@ -8,7 +8,17 @@ import cartIcon from '../../assets/images/cartIcon.png';
 import { CartContext } from '../context/CartContext'; // Asegúrate de que la ruta sea correcta
 import CartNotification from './CartNotification';
 import ProductSearch from '../components/ProductSearch'
+import { useLocation, useNavigate } from 'react-router-dom';
+
 const Navbar: React.FC = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('transbank_token');
+    // Redirige al login de transbank, o al home si quieres.
+    navigate('/transbank-login');
+  };
   const { getTotalItems, notification } = useContext(CartContext) || {};
   const totalItems = getTotalItems ? getTotalItems() : 0;
 
@@ -24,6 +34,13 @@ const Navbar: React.FC = () => {
         <a href="/">
           <img src={logo} alt="Joyería Vivian" className={styles.logo} />
         </a>
+         {/* ...tu código anterior... */}
+      {/* Muestra botón solo si está en sesión de transbank */}
+      {localStorage.getItem('transbank_token') && (
+        <button onClick={handleLogout} className={styles.logoutButton}>
+          Cerrar sesión Transbank Testers
+        </button>
+      )}
         <div className={styles.flexSpacer} />
         <ProductSearch />
         <a href="/cart" className={styles.cartLink}>

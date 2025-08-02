@@ -82,7 +82,7 @@ const Cart: React.FC = () => {
         <FaArrowRight className={styles.arrowIcon} />
         <span className={styles.activeStep}>Procesando el pago</span>
         <FaArrowRight className={styles.arrowIcon} />
-        <span className={styles.activeStep}>Entrega de comprobante</span>
+        <span className={styles.activeStep}>Comprobante</span>
       </div>
       <div className={styles.cartContent}>
         <div className={styles.cartItemsContainer}>

@@ -22,6 +22,7 @@ import Dashboard from './presentation/screens/cms/Dashboard/Dashboard';
 import ViewProducts from './presentation/screens/cms/Products/View/ViewProducts';
 import CreateProduct from './presentation/screens/cms/Products/Create/CreateProduct';
 import EditProduct from './presentation/screens/cms/Products/Edit/EditProduct';
+import CmsSales from './presentation/screens/cms/Sales/CmsSales';
 
 const App: React.FC = () => {
   return (
@@ -42,6 +43,7 @@ const App: React.FC = () => {
                 <Route path="/products" element={<ViewProducts />} />
                 <Route path="/products/create" element={<CreateProduct />} />
                 <Route path="/products/edit/:product_code" element={<EditProduct />} />
+                <Route path="/sales" element={<CmsSales />} />
               </Routes>
             </CmsLayout>
           </PrivateRouteCMS>

@@ -18,10 +18,6 @@ const Dashboard: React.FC = () => {
           <p>Sube y administra imágenes de productos.</p>
         </Link>
 
-        <Link to="/cms/sales" className={styles.card}>
-          <h2>Gestión de Ventas</h2>
-          <p>Revisa y actualiza estados de ventas realizadas.</p>
-        </Link>
       </div>
     </div>
   );

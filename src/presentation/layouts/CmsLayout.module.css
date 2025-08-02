@@ -73,3 +73,40 @@
   border-top: 1px solid #e1d6b3;
   margin-top: auto;
 }
+
+.logoutButton {
+  margin-left: auto;
+  background: #fff;
+  color: #d6b469;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  padding: 7px 19px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.17s, color 0.17s, border 0.17s;
+  box-shadow: 0 1px 4px #d6b46922;
+}
+
+.logoutButton:hover {
+  background: #d6b469;
+  color: #fff;
+  border: 2px solid #fff;
+}
+.logoutButton {
+  margin-left: auto;
+  background: #d6b469;
+  border-color: white;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+.logoutButton:hover {
+  background: #ffffff;
+  color: #d6b469;
+
+}
+

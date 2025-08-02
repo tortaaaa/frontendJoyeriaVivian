@@ -49,6 +49,25 @@ h2 {
   margin-bottom: 0;
 }
 
+.form select {
+  padding: 0.58rem 0.95rem;
+  border-radius: 6px;
+  border: 1.4px solid #e6d9be;
+  background: #f9f7f2;
+  font-size: 1.05rem;
+  color: #2b2826;
+  transition: border 0.2s;
+  outline: none;
+  margin-bottom: 0;
+  appearance: none; /* Elimina el feo estilo default */
+  cursor: pointer;
+}
+
+.form select:focus {
+  border-color: #d6b469;
+  background: #fffbe9;
+}
+
 .form input:focus,
 .form textarea:focus {
   border-color: #d6b469;

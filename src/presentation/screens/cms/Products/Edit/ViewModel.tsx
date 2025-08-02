@@ -19,7 +19,6 @@ export const useViewModel = (product_code: string) => {
     gemstone_type: "",
     gemstone_size: 0,
     is_wedding: false,
-    is_baby: false,
     is_men: false,
     images: [],
   });

@@ -5,10 +5,10 @@ import { FaInstagram, FaEnvelope, FaWhatsapp, FaFacebook } from 'react-icons/fa'
 import Modal from '../../components/Modal';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import emailjs from '@emailjs/browser';
+import { useContactForm } from './ViewModel';
 
 const Contact: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const { isModalOpen, handleCloseModal, handleSendForm } = useContactForm();
 
   const validationSchema = Yup.object({
     name: Yup.string().required('Nombre es requerido'),
@@ -16,22 +16,6 @@ const Contact: React.FC = () => {
     subject: Yup.string().required('Asunto es requerido'),
     message: Yup.string().required('Mensaje es requerido'),
   });
-
-  const sendEmail = (values: { name: string; email: string; subject: string; message: string }) => {
-    emailjs.send('service_ggmof4o', 'template_954d1rn', values, 'DWDAPAxD2l63tt2qT')
-      .then(
-        () => {
-          setIsModalOpen(true);
-        },
-        (error) => {
-          console.error('Error:', error.text);
-        }
-      );
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
 
   return (
     <div>
@@ -47,7 +31,7 @@ const Contact: React.FC = () => {
               </a>
               <span className={styles.contactText}>joyeria.vivian</span>
             </div>
-              <div className={styles.contactMethod}>
+            <div className={styles.contactMethod}>
               <a href="https://www.facebook.com/JoyeriaVivian" target="_blank" rel="noopener noreferrer">
                 <FaFacebook className={`${styles.icon} ${styles.iconBlack}`} />
               </a>
@@ -69,12 +53,12 @@ const Contact: React.FC = () => {
         </div>
       </div>
       <div className={styles.formContainer}>
-        <h3> Si gustas nos podemos comunicar contigo, completa el formulario a continuación y te contactamos en cuanto podamos. Gracias.</h3>
+        <h3>Si gustas nos podemos comunicar contigo, completa el formulario a continuación y te contactamos en cuanto podamos. Gracias.</h3>
         <Formik
           initialValues={{ name: '', email: '', subject: '', message: '' }}
           validationSchema={validationSchema}
-          onSubmit={(values, { resetForm }) => {
-            sendEmail(values);
+          onSubmit={async (values, { resetForm }) => {
+            await handleSendForm(values); // Envía usando el ViewModel y flujo limpio
             resetForm();
           }}
         >

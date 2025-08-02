@@ -1,46 +1,25 @@
 import { useState } from 'react';
-
-
+import { sendContactForm } from '../../../domain/useCases/contact/sendContactForm';
 
 export const useContactForm = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-
   const [isModalOpen, setModalOpen] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
+  // Esta función se usará en el onSubmit de Formik
+  const handleSendForm = async (formData: { name: string; email: string; subject: string; message: string }) => {
+    try {
+      await sendContactForm(formData); // Llama al use case (que llama al repo que llama al backend)
+      setModalOpen(true);
+    } catch (error) {
+      // Puedes agregar más lógica de error aquí (ejemplo: mostrar un modal de error)
+      alert('Error al enviar el formulario. Intenta de nuevo más tarde.');
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Form data submitted:', formData);
-    setModalOpen(true);
-    setFormData({
-      name: '',
-      email: '',
-      subject: '',
-      message: ''
-    });
-  };
-
-  const handleCloseModal = () => {
-    setModalOpen(false);
-  };
+  const handleCloseModal = () => setModalOpen(false);
 
   return {
-    formData,
-    handleChange,
-    handleSubmit,
     isModalOpen,
-    handleCloseModal
+    handleCloseModal,
+    handleSendForm
   };
 };

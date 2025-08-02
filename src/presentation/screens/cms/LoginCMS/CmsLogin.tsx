@@ -1,6 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './CmsLogin.module.css';
 import useCmsLoginViewModel from './ViewModel';
+import { useNavigate } from 'react-router-dom';
+
+// Función para validar si el JWT está expirado
+function isJwtExpired(token: string | null): boolean {
+  if (!token) return true;
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    // exp está en segundos, Date.now() en milisegundos
+    return payload.exp * 1000 < Date.now();
+  } catch (e) {
+    // Si no puede decodificar, lo considera inválido/expirado
+    return true;
+  }
+}
 
 const CmsLogin: React.FC = () => {
   const {
@@ -8,6 +22,19 @@ const CmsLogin: React.FC = () => {
     password, setPassword,
     loading, error, handleSubmit
   } = useCmsLoginViewModel();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('cms_token');
+    if (token && !isJwtExpired(token)) {
+      // Token válido, redirige a dashboard
+      navigate('/cms/dashboard', { replace: true });
+    } else if (token && isJwtExpired(token)) {
+      // Token vencido, limpiar localStorage
+      localStorage.removeItem('cms_token');
+    }
+  }, [navigate]);
 
   return (
     <div className={styles.container}>

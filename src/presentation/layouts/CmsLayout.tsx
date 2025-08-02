@@ -1,14 +1,27 @@
-// src/presentation/layouts/CmsLayout.tsx
 import React from 'react';
 import styles from './CmsLayout.module.css';
+import { useNavigate } from 'react-router-dom';
 
 const CmsLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const navigate = useNavigate();
+
+  // Función para cerrar sesión
+  const handleLogout = () => {
+    localStorage.removeItem('cms_token'); // Limpia token
+    navigate('/cms/login', { replace: true }); // Redirige al login
+  };
+
   return (
     <div className={styles.cmsRoot}>
       {/* Navbar superior */}
       <header className={styles.navbar}>
         <div className={styles.navTitle}>CMS Joyería Vivian</div>
-        {/* Aquí puedes poner usuario, botón logout, etc. */}
+        <button
+          className={styles.logoutButton}
+          onClick={handleLogout}
+        >
+          Cerrar Sesión
+        </button>
       </header>
 
       <div className={styles.contentWrapper}>
@@ -18,7 +31,6 @@ const CmsLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             <ul>
               <li><a href="/cms/dashboard">Dashboard</a></li>
               <li><a href="/cms/products">Productos</a></li>
-              <li><a href="/cms/images">Imágenes</a></li>
               <li><a href="/cms/sales">Ventas</a></li>
               {/* Puedes añadir más links aquí */}
             </ul>

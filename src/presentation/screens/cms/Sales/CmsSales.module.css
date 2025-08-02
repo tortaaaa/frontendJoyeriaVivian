@@ -1,0 +1,122 @@
+.container {
+  padding: 2.5rem 1.5rem;
+  background: #fff;
+  border-radius: 12px;
+  max-width: 900px;
+  margin: 2rem auto;
+  box-shadow: 0 4px 16px 0 rgba(0,0,0,0.08);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #433f3f;
+  letter-spacing: 0.5px;
+}
+
+.tableContainer {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 5px 0 #0001;
+}
+
+th, td {
+  border-bottom: 1px solid #e9e2d4;
+  padding: 1rem 0.7rem;
+  text-align: left;
+  font-size: 1.02rem;
+}
+
+th {
+  background: #f8f4ed;
+  color: #70612e;
+  font-weight: bold;
+  letter-spacing: 0.2px;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+select {
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  border: 1.3px solid #e6d9be;
+  background: #f9f7f2;
+  color: #534a37;
+  font-size: 0.99rem;
+  outline: none;
+  transition: border 0.2s;
+}
+
+select:focus {
+  border-color: #d6b469;
+  background: #fffbe9;
+}
+
+.statusChip {
+  display: inline-block;
+  padding: 0.28em 1em;
+  border-radius: 20px;
+  font-size: 0.97em;
+  font-weight: 600;
+  margin-bottom: 0.16em;
+  margin-right: 0.15em;
+  letter-spacing: 0.04em;
+}
+
+.status-pending {
+  background: #fff6d5;
+  color: #b59324;
+  border: 1.1px solid #eed187;
+}
+.status-paid {
+  background: #e7fbe9;
+  color: #1c8d42;
+  border: 1.1px solid #73e69f;
+}
+.status-canceled {
+  background: #fbe7e7;
+  color: #b02424;
+  border: 1.1px solid #e67373;
+}
+
+
+.error {
+  color: #c82a2a;
+  margin: 0.8rem 0 0 0;
+  text-align: center;
+  font-size: 1.03rem;
+}
+
+.info {
+  color: #a29e96;
+  margin-top: 2.5rem;
+  text-align: center;
+  font-size: 1.11rem;
+}
+
+/* Si pones botones en acciones: */
+.button {
+  padding: 0.45rem 1.05rem;
+  background: #d6b469;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.98rem;
+  margin-right: 0.5rem;
+  transition: background 0.18s;
+  text-decoration: none;
+}
+.button:hover {
+  background: #b99640;
+}

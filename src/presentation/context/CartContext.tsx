@@ -119,17 +119,19 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 };
   
 
-  const removeFromCart = (productCode) => {
-    setCart(prevCart => prevCart.filter(item => item.product_code !== productCode));
-  };
+const removeFromCart = (productCode: string) => {
+  setCart(prevCart => prevCart.filter(item => item.product_code !== productCode));
+};
+
   const clearCart = () => {
     setCart([]);
   };
 
-  const getCartItemQuantity = (id: string) => {
-    const cartItem = cart.find(item => item.id === id);
-    return cartItem ? cartItem.quantity : 0;
-  };
+const getCartItemQuantity = (productCode: string) => {
+  const cartItem = cart.find(item => item.product_code === productCode);
+  return cartItem ? cartItem.quantity : 0;
+};
+
 
   const getTotalItems = () => {
     return cart.reduce((total, item) => total + item.quantity, 0);
