@@ -13,4 +13,7 @@ export const ProductCrud = {
     // NUEVAS FUNCIONES
     addImage: (product_code: string, url: string) => repository.addImage(product_code, url),
     deleteImage: (product_code: string, url: string) => repository.deleteImage(product_code, url),
+    bulkUpload: (rows: any[]) => repository.bulkUpload(rows),
+
+
 };

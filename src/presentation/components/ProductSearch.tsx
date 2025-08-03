@@ -14,6 +14,16 @@ interface Product {
 
 const API_BASE_URL = 'http://localhost:8000';
 
+const categoryDisplayNames: Record<string, string> = {
+  ring: 'Anillo',
+  bracelet: 'Pulsera',
+  earring: 'Aro',
+  'baby earring': 'Aros para bebés',
+  chain: 'Cadena',
+  pendant: 'Colgante',
+  // agrega aquí más si alguna vez tienes nuevas categorías...
+};
+
 const ProductSearch: React.FC = () => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<Product[]>([]);
@@ -101,8 +111,10 @@ const ProductSearch: React.FC = () => {
             )}
               <div className={styles.productDetails}>
                 <div className={styles.productName}>{product.name}</div>
-                <div>Categoría: {product.category}</div>
-                <div>Precio: ${product.price}</div>
+<div>
+  Categoría:{' '}
+  {categoryDisplayNames[product.category] || product.category}
+</div>                <div>Precio: ${product.price}</div>
               </div>
             </div>
           ))}

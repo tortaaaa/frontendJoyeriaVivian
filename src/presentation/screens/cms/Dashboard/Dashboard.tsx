@@ -13,15 +13,11 @@ const Dashboard: React.FC = () => {
           <p>Crear, editar, activar/desactivar productos.</p>
         </Link>
 
-        <Link to="/cms/images" className={styles.card}>
-          <h2>Gestión de Imágenes</h2>
-          <p>Sube y administra imágenes de productos.</p>
-        </Link>
-
         <Link to="/cms/sales" className={styles.card}>
           <h2>Gestión de Ventas</h2>
-          <p>Revisa y actualiza estados de ventas realizadas.</p>
+          <p>Administra las ventas.</p>
         </Link>
+
       </div>
     </div>
   );

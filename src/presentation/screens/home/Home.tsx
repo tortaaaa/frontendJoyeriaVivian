@@ -38,10 +38,17 @@ const Home: React.FC = () => {
         </Slider>
 
         <div className={styles.text}>
-          <h2>HardWear by Tiffany</h2>
+          <h2>Bienvenidos a Joyería VIVIAN</h2>
           <p>
-            Showcasing individual stories of power and resilience, award-winning actresses Greta Lee and Mikey Madison and acclaimed painter Anna Weyant wear the bold links of HardWear by Tiffany, a symbol of love’s transformative strength. 
+            Descubre la elegancia y el brillo que mereces. 
           </p>
+          <p>
+          En Vivian diseñamos piezas únicas que realzen con tu estilo y capturen momentos inolvidables.
+          </p>
+          <p>
+         Nos destacamos por ofrecer calidad, exclusividad y una pasión única por la joyería en cada detalle.
+          </p>
+          <p>Tu belleza merece brillar. </p>
           <button className={styles.button}>Descubre más</button>
         </div>
       </div>

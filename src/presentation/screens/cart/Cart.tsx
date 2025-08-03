@@ -82,7 +82,7 @@ const Cart: React.FC = () => {
         <FaArrowRight className={styles.arrowIcon} />
         <span className={styles.activeStep}>Procesando el pago</span>
         <FaArrowRight className={styles.arrowIcon} />
-        <span className={styles.activeStep}>Entrega de comprobante</span>
+        <span className={styles.activeStep}>Comprobante</span>
       </div>
       <div className={styles.cartContent}>
         <div className={styles.cartItemsContainer}>
@@ -96,8 +96,7 @@ const Cart: React.FC = () => {
                     <h4>Código de producto: {item.product_code}</h4>
                     <h2 
                       onClick={() => navigate(`/product/${item.product_code}`)}
-                      title="Ver detalles del producto"
-                    >{item.name}</h2>
+                      title="Ver detalles del producto">{item.name}</h2>
                     <h4>{item.description}</h4>
                     <h4>${item.price.toLocaleString()} CLP</h4>
                     {item.stock < 1 && <p className={styles.outOfStock}>Producto sin stock</p>}
