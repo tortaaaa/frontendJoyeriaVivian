@@ -7,14 +7,14 @@ import { Product } from '../../domain/entities/Product';
 export class ProductRepositoryImpl implements ProductRepository {
     
         async bulkUpload(rows: any[]) {
-        const response = await api.post('/api/products/bulk_upload/', rows);
+        const response = await api.post('/products/bulk_upload/', rows);
         return response.data;
     }
 
     async getProductsByCategory(category: string): Promise<Product[]> {
         try {
             console.log(`[INFO] Solicitando productos de la categoría: ${category}`);
-            const response = await api.get(`/api/products/?category=${category}`);
+            const response = await api.get(`/products/?category=${category}`);
             console.log('[INFO] Productos recibidos:', response.data);
 
             return response.data.map((item: any) => ({
@@ -42,7 +42,7 @@ export class ProductRepositoryImpl implements ProductRepository {
     async getProductByCode(product_code: string): Promise<Product> {
         try {
             console.log(`[INFO] Solicitando producto con código: ${product_code}`);
-            const response = await api.get(`/api/products/${product_code}`);
+            const response = await api.get(`/products/${product_code}`);
             const item = response.data;
             console.log('[INFO] Producto recibido:', item);
 
@@ -91,6 +91,6 @@ export class ProductRepositoryImpl implements ProductRepository {
     // Eliminar imagen
     async deleteImage(product_code: string, url: string) {
         // Usa el endpoint delete_by_url que espera product_code y url
-        await api.delete(`/api/images/delete_by_url/?product=${product_code}&url=${encodeURIComponent(url)}`);
+        await api.delete(`/images/delete_by_url/?product=${product_code}&url=${encodeURIComponent(url)}`);
     }
 }
