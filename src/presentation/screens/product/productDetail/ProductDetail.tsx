@@ -93,7 +93,6 @@ const ProductDetail: React.FC = () => {
 
       <div className={styles.infoSection}>
         <h1>{product.name}</h1>
-        <h2>Modelo {product.product_code}</h2>
         <p className={styles.description}>{product.description}</p>
         <p className={styles.price}>${product.price.toLocaleString()} CLP</p>
         {isOutOfStock && <p className={styles.outOfStockMessage}>Agotado</p>}

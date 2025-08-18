@@ -114,10 +114,14 @@ const Cart: React.FC = () => {
                     <h4>Código de producto: {item.product_code}</h4>
                     <h2
                       onClick={() => navigate(`/product/${item.product_code}`)}
+<<<<<<< HEAD
                       title="Ver detalles del producto"
                     >
                       {item.name}
                     </h2>
+=======
+                      title="Ver detalles del producto">{item.name}</h2>
+>>>>>>> origin/Mati
                     <h4>{item.description}</h4>
                     <h4>${item.price.toLocaleString()} CLP</h4>
                     {item.stock < 1 && (

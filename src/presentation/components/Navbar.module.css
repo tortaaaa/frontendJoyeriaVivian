@@ -1,12 +1,68 @@
-/* src/presentation/components/Navbar.module.css */
 .topNavbar {
-  background-color: #F4F4F4; /* Color de fondo */
+  background-color: #F4F4F4;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
   width: 100%;
   box-sizing: border-box;
+  flex-wrap: nowrap; /* No dejar que se envuelvan los elementos en pantallas grandes */
+  gap: 10px;
+}
+
+.logoUserContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.flexSpacer {
+  flex: 1;
+}
+
+.cartMenuContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: none; /* No crecer para evitar que el input empuje elementos */
+}
+
+.cartMenuContainer input {
+  max-width: 250px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px 10px;
+  font-size: 16px;
+  border: 2px solid #D6B469; /* borde dorado */
+  border-radius: 20px;
+  transition: border-color 0.3s ease;
+}
+
+.logoutButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  transition: filter 0.2s;
+}
+
+.logoutButton:hover,
+.logoutButton:focus {
+  filter: brightness(0.8);
+  outline: none;
+}
+
+.logoutIcon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  display: block;
 }
 
 .logoutButton {
@@ -37,16 +93,18 @@
 
 .logo {
   height: 70px;
+  display: flex;
+  align-items: center;
 }
-.flexSpacer {
-  flex: 1;
-}
+
 .cartLink {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .cartIcon {
-  height: 40px; /* Incrementa el tamaño del ícono del carrito */
+  height: 40px;
   margin-right: 10px;
 }
 
@@ -62,24 +120,26 @@
 }
 
 .menuButton {
-  display: none; /* Ocultar el botón del menú por defecto */
+  display: none;
   background: none;
   border: none;
   cursor: pointer;
+  align-items: center;
 }
 
 .menuIcon {
   font-size: 24px;
-  color: #D6B469; /* Color del ícono del menú */
+  color: #D6B469;
 }
 
+/* Bottom Navbar y navLinks se mantienen igual que antes */
 .bottomNavbar {
   background-color: #D6B469;
   display: flex;
-  justify-content: space-between; /* Ajustamos para que los elementos se distribuyan correctamente */
+  justify-content: space-between;
   width: 100%;
   box-sizing: border-box;
-  padding: 0 10px; /* Añadimos padding para asegurarnos de que los elementos no toquen el borde */
+  padding: 0 10px;
 }
 
 .navLinks {
@@ -87,7 +147,7 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  flex-grow: 1; /* Asegura que ocupe todo el ancho disponible */
+  flex-grow: 1;
 }
 
 .navLinks li {
@@ -98,52 +158,86 @@
 .navLinks a {
   color: #F4F4F4;
   text-decoration: none;
-  font-weight: normal; /* Cambiamos a normal para quitar las negritas */
-  transition: color 0.3s; /* Añade una transición suave para el cambio de color */
-  font-family: 'Roboto', sans-serif; /* Aplicar la fuente Roboto */
+  font-weight: normal;
+  transition: color 0.3s;
+  font-family: 'Roboto', sans-serif;
 }
 
 .navLinks a:hover {
-  color: #B88A42; /* Color dorado oscuro para el hover */
+  color: #B88A42;
 }
 
 .navLinks li:last-child {
-  margin-left: auto; /* Empuja el último elemento a la derecha */
+  margin-left: auto;
 }
 
-/* Estilos y animación para el menú deslizante en pantallas pequeñas */
+/* Responsive: móviles */
 @media (max-width: 925px) {
-  .searchInput {
-    max-width: 200px; /* Reduce el ancho máximo en pantallas pequeñas */
+  .topNavbar {
+    flex-wrap: wrap; /* permitir salto de línea solo en móviles */
+    gap: 10px;
+    align-items: center;
   }
-  .bottomNavbar {
+
+  .logoUserContainer {
+    flex: 1 1 100%;
+    justify-content: space-between;
+    order: 1;
+  }
+
+  .cartMenuContainer {
+    order: 2;
+    margin-left: auto;
     display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1 1 100%;
+    justify-content: flex-end;
+  }
+
+  .menuButton {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  /* Ocultar buscador desktop y mostrar lupa */
+  .desktopSearch {
+    display: none;
+  }
+
+  .mobileSearch {
+    display: block;
+  }
+
+  /* Menú lateral deslizable */
+  .bottomNavbar {
     flex-direction: column;
     align-items: flex-start;
     position: fixed;
     top: 77px;
-    right: -300px; /* Inicialmente fuera de la pantalla */
-    height: 100%;
+    right: -300px;
+    height: calc(100vh - 77px);
     width: 250px;
     background-color: #D6B469;
     padding: 20px;
     box-shadow: -2px 0 5px rgba(0,0,0,0.5);
-    transition: right 0.3s ease; /* Animación para el deslizamiento */
+    transition: right 0.3s ease;
+    overflow-y: auto;
+    z-index: 999;
   }
-  .navLinks {
-    display: flex;
-    flex-direction: column; /* Cambia la dirección a columna */
-    align-items: flex-start; /* Alinea los elementos al inicio */
-    width: 100%; /* Asegura que ocupe todo el ancho disponible */
-  }
-  .menuButton {
-    display: block; /* Muestra el botón del menú en pantallas pequeñas */
-  }
+
   .showMenu {
-    right: 0; /* Desliza el menú dentro de la pantalla */
+    right: 0;
   }
+
+  .navLinks {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
   .navLinks li {
-    margin: 10px 0; /* Añade un margen entre los elementos */
+    margin: 10px 0;
   }
   
 }

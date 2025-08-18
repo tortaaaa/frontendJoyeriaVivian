@@ -19,11 +19,10 @@ body {
   padding: 0;
   margin: 0;
   background-color: #ffffff;
-  box-sizing: border-box;
   overflow-x: hidden;
 }
 
-/* SECCIÓN SLIDER + TEXTO */
+/* SECCIÓN SLIDER + TEXTO (principal) */
 .welcome {
   display: flex;
   justify-content: center;
@@ -31,29 +30,27 @@ body {
   flex-wrap: wrap;
   width: 100%;
   gap: 40px;
+  padding: 40px 20px;
 }
 
-/* SLIDERS MÁS GRANDES */
 .slider {
-  flex: 1 1 50%;
-  min-width: 300px;
-  max-width: 900px; /* Aumentado para slider más grande */
+  flex: 1 1 300px;
+  max-width: 900px;
+  width: 100%;
 }
 
 .ringImage {
   width: 100%;
-  max-height: 700px; /* Aumentado para slider más alto */
-  aspect-ratio: 1.5 / 1; /* Relación de aspecto más ancha */
+  max-height: 700px;
+  aspect-ratio: 1.5 / 1;
   object-fit: cover;
   display: block;
   margin: 0 auto;
   border-radius: 10px;
 }
 
-/* TEXTO */
 .text {
-  flex: 1 1 50%;
-  min-width: 300px;
+  flex: 1 1 300px;
   max-width: 500px;
   font-size: 18px;
   color: #000;
@@ -75,28 +72,28 @@ body {
   background-color: #b89542;
 }
 
-/* SECCIÓN TEXTO + SLIDER */
+/* SECCIÓN TEXTO + SLIDER (segunda sección) */
 .textSliderSection {
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   padding: 60px 20px;
   gap: 40px;
+  width: 100%;
 }
 
 .textWrapper {
-  flex: 1 1 50%;
-  min-width: 300px;
+  flex: 1 1 300px;
   max-width: 500px;
   text-align: left;
 }
 
-/* SEGUNDA SECCIÓN SLIDER */
 .sliderWrapper {
-  flex: 1 1 50%;
-  min-width: 300px;
-  max-width: 900px; /* Aumentado */
+  flex: 1 1 300px;
+  max-width: 900px;
+  width: 100%;
+  display: block;
 }
 
 .sliderWrapper .ringImage {
@@ -104,21 +101,21 @@ body {
   max-height: 700px;
   object-fit: cover;
   border-radius: 10px;
-  margin: 0 auto;
   display: block;
+  margin: 0 auto;
 }
 
 /* IMAGEN ORFEBRE */
 .imagen {
-  flex: 1 1 50%;
-  min-width: 300px;
+  flex: 1 1 300px;
   max-width: 900px;
+  width: 100%;
 }
 
 .imagen img {
   width: 100%;
   border-radius: 10px;
-  max-height: 700px; /* Aumentado para hacerla más grande */
+  max-height: 700px;
   object-fit: cover;
 }
 
@@ -143,9 +140,13 @@ body {
   .textWrapper {
     padding: 0 10px;
   }
+
+  .sliderWrapper .ringImage {
+    max-height: 400px;
+  }
 }
 
-/* Quitar bordes, sombras y contornos del slider react-slick */
+/* LIMPIEZA DE ESTILOS PARA SLIDER */
 .slick-slider,
 .slick-list,
 .slick-track,
@@ -158,14 +159,14 @@ body {
   background: none !important;
 }
 
-/* Eliminar border-radius de imágenes si no quieres bordes redondeados */
+/* Eliminar border-radius si no quieres esquinas redondeadas */
 .ringImage,
 .sliderWrapper .ringImage,
 .imagen img {
   border-radius: 0 !important;
 }
 
-/* Opcional: quitar espacio que pudiera generar movimientos laterales */
+/* Ajustes para evitar desbordes laterales */
 .slick-track {
   margin: 0 auto !important;
 }

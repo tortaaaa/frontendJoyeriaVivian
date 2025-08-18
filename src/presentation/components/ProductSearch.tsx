@@ -12,7 +12,7 @@ interface Product {
   images?: string[];
 }
 
-const API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL = 'https://joyeriavivian.cl/api';
 
 const categoryDisplayNames: Record<string, string> = {
   ring: 'Anillo',
