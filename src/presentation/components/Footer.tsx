@@ -7,10 +7,6 @@ const Footer: React.FC = () => {
     window.location.href = '/contact';
   };
 
-  const handleCmsLoginClick = () => {
-    window.location.href = '/cms/login';
-  };
-
   return (
     <footer className={styles.footer}>
       <div className={styles.left}>
