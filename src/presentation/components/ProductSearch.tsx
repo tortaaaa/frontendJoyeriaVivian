@@ -12,7 +12,7 @@ interface Product {
   images?: string[];
 }
 
-const API_BASE_URL = 'https://joyeriavivian.cl/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 const categoryDisplayNames: Record<string, string> = {
   ring: 'Anillo',
@@ -40,7 +40,7 @@ const ProductSearch: React.FC = () => {
     setLoading(true);
     try {
       const response = await axios.get<Product[]>(
-        `${API_BASE_URL}/api/buscar/?q=${encodeURIComponent(search)}`
+        `${API_BASE_URL}/buscar/?q=${encodeURIComponent(search)}`
       );
       setResults(response.data);
       setShowDropdown(true);

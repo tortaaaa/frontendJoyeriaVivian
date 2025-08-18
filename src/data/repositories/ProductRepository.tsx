@@ -85,7 +85,7 @@ export class ProductRepositoryImpl implements ProductRepository {
 
     // Subir imagen
     async addImage(product_code: string, url: string) {
-        await api.post(`/api/images/`, { product: product_code, url });
+        await api.post(`/images/`, { product: product_code, url });
     }
 
     // Eliminar imagen
