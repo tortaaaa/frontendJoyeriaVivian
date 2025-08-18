@@ -5,19 +5,17 @@ import logo from '../../assets/images/pageLogo.png';
 import cartIcon from '../../assets/images/cartIcon.png';
 import { CartContext } from '../context/CartContext';
 import CartNotification from './CartNotification';
-import ProductSearch from '../components/ProductSearch';
-import { useLocation, useNavigate } from 'react-router-dom';
-import logoutIcon from '../../assets/images/logoutIcon.png';
+import ProductSearch from '../components/ProductSearch'
+import { useNavigate } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
-  const location = useLocation();
   const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem('transbank_token');
+    // Redirige al login de transbank, o al home si quieres.
     navigate('/transbank-login');
   };
-
   const { getTotalItems, notification } = useContext(CartContext) || {};
   const totalItems = getTotalItems ? getTotalItems() : 0;
 
@@ -53,40 +51,25 @@ const Navbar: React.FC = () => {
   return (
     <header>
       <div className={styles.topNavbar}>
-
-        <div className={styles.logoUserContainer}>
-          <a href="/">
-            <img src={logo} alt="Joyería Vivian" className={styles.logo} />
-          </a>
-          {localStorage.getItem('transbank_token') && (
-            <button
-              onClick={handleLogout}
-              className={styles.logoutButton}
-              aria-label="Cerrar sesión"
-              title="Cerrar sesión"
-            >
-              <img src={logoutIcon} alt="" className={styles.logoutIcon} />
-            </button>
-          )}
-        </div>
-
-        <div className={styles.cartMenuContainer}>
-          <ProductSearch />
-          <a href="/cart" className={styles.cartLink}>
-            <img src={cartIcon} alt="Carrito" className={styles.cartIcon} />
-            {totalItems > 0 && <span className={styles.cartBadge}>{totalItems}</span>}
-          </a>
-          <button
-            ref={buttonRef}
-            className={styles.menuButton}
-            onClick={toggleMenu}
-            aria-expanded={isMenuOpen}
-            aria-label="Toggle menu"
-          >
-            <span className={styles.menuIcon}>&#9776;</span>
-          </button>
-        </div>
-
+        <a href="/">
+          <img src={logo} alt="Joyería Vivian" className={styles.logo} />
+        </a>
+         {/* ...tu código anterior... */}
+      {/* Muestra botón solo si está en sesión de transbank */}
+      {localStorage.getItem('transbank_token') && (
+        <button onClick={handleLogout} className={styles.logoutButton}>
+          Cerrar sesión Transbank Testers
+        </button>
+      )}
+        <div className={styles.flexSpacer} />
+        <ProductSearch />
+        <a href="/cart" className={styles.cartLink}>
+          <img src={cartIcon} alt="Carrito" className={styles.cartIcon} />
+          {totalItems > 0 && <span className={styles.cartBadge}>{totalItems}</span>}
+        </a>
+        <button className={styles.menuButton} onClick={toggleMenu}>
+          <span className={styles.menuIcon}>&#9776;</span>
+        </button>
       </div>
 
       <nav

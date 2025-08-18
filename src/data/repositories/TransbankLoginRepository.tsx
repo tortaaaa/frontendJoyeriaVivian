@@ -1,7 +1,6 @@
-// Importa el helper api que ya usas
-import api from '../sources/api/apiJoyeriaVivian'; // Ajusta la ruta si es necesario
+import api from '../sources/api/apiJoyeriaVivian';
 
-const API_URL = '/transbank-auth/login/';
+const API_URL = '/transbank-auth/login/'; // <-- SLASH AL FINAL
 
 export class TransbankLoginRepository {
   static async login({ username, password }: { username: string, password: string }) {

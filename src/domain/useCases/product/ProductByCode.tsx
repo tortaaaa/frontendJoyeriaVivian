@@ -1,7 +1,7 @@
-import { ProductRepositoryImpl } from "../../../data/repositories/ProductRepository"; // TODO Importar el repositorio de data cuando esté listo
+import { ProductRepositoryImpl } from "../../../data/repositories/ProductRepository";
 
-const { getProductByCode } = new ProductRepositoryImpl();
+const productRepository = new ProductRepositoryImpl();
 
 export const ProductByCode = async (product_code: string) => {
-  return await getProductByCode(product_code);
+  return await productRepository.getProductByCode(product_code);
 }
