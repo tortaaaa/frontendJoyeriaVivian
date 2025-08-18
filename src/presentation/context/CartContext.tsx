@@ -5,6 +5,7 @@ import React, {
   useEffect,
   useContext,
   ReactNode,
+  useCallback,
 } from 'react';
 import { Product } from '../../domain/entities/Product';
 import { ProductByCode } from '../../domain/useCases/product/ProductByCode';
@@ -32,7 +33,6 @@ interface CartContextType {
   updateCartInformation: () => Promise<boolean>;
 }
 
-// 👉 Usamos null en vez de undefined y daremos un hook que asegura no-null.
 const CartContext = createContext<CartContextType | null>(null);
 
 const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
@@ -50,7 +50,6 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const validateStock = () => {
     setCart(prevCart =>
       prevCart.map(item => {
-        // Ajusta cantidad a [0, stock]
         const clampedQty = Math.max(0, Math.min(item.quantity, item.stock));
         if (clampedQty !== item.quantity) {
           return { ...item, quantity: clampedQty };
@@ -60,7 +59,8 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     );
   };
 
-  const updateCartInformation = async (): Promise<boolean> => {
+  // 👇 solo setea el carrito si realmente hubo cambios
+  const updateCartInformation = useCallback(async (): Promise<boolean> => {
     let hasChanges = false;
 
     const updatedCart = await Promise.all(
@@ -79,9 +79,9 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
           if (updatedProduct.stock < item.quantity) {
             updatedQuantity = updatedProduct.stock;
+            hasChanges = true;
           }
 
-          // Evita negativos
           updatedQuantity = Math.max(0, updatedQuantity);
 
           return { ...updatedProduct, quantity: updatedQuantity };
@@ -95,9 +95,12 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       })
     );
 
-    setCart(updatedCart);
+    if (hasChanges) {
+      setCart(updatedCart);
+    }
+
     return hasChanges;
-  };
+  }, [cart]);
 
   const addToCart = (item: CartItem) => {
     setCart(prevCart => {
@@ -123,12 +126,10 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         return updatedCart;
       }
 
-      // Producto nuevo
       const adjustedQuantity = Math.min(Math.max(item.quantity, 1), item.stock);
       return [...prevCart, { ...item, quantity: adjustedQuantity }];
     });
 
-    // Mostrar notificación
     setNotification({ product: item, visible: true });
 
     setTimeout(() => {
@@ -184,7 +185,6 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   );
 };
 
-// 👇 Hook que garantiza el tipo no-null en consumo (Cart.tsx y demás)
 const useCart = (): CartContextType => {
   const ctx = useContext(CartContext);
   if (!ctx) {

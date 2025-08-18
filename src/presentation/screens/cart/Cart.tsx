@@ -1,6 +1,6 @@
 // src/presentation/screens/cart/Cart.tsx
 import React, { useEffect, useState } from 'react';
-import { useCart, type CartItem } from '../../context/CartContext'; // 👈 ajusta la ruta si es necesario
+import { useCart, type CartItem } from '../../context/CartContext';
 import styles from './Cart.module.css';
 import cartIcon from '../../../assets/images/cartIcon.png';
 import { FaArrowRight } from 'react-icons/fa';
@@ -9,7 +9,6 @@ import * as Yup from 'yup';
 import ErrorModal from '../../components/ErrorModal';
 
 const Cart: React.FC = () => {
-  // Ahora todo viene no-nullable desde el contexto
   const {
     cart,
     removeFromCart,
@@ -22,11 +21,27 @@ const Cart: React.FC = () => {
   const navigate = useNavigate();
   const [showWarning, setShowWarning] = useState<string | null>(null);
   const [showErrorModal, setShowErrorModal] = useState<boolean>(false);
+  const [isSyncing, setIsSyncing] = useState<boolean>(false);
 
   useEffect(() => {
-    // Mantén el carrito sincronizado con stock/precio
-    void updateCartInformation();
-  }, [updateCartInformation]);
+    let alive = true;
+
+    const sync = async () => {
+      setIsSyncing(true);
+      const hasChanges = await updateCartInformation();
+      if (!alive) return;
+      if (hasChanges || cart.some(item => item.stock === 0)) {
+        setShowErrorModal(true);
+      }
+      setIsSyncing(false);
+    };
+
+    void sync();
+    return () => {
+      alive = false;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const cartSchema = Yup.object().shape({
     cart: Yup.array()
@@ -35,10 +50,12 @@ const Cart: React.FC = () => {
   });
 
   const handleIncrement = (item: CartItem) => {
+    if (isSyncing) return;
     addToCart({ ...item, quantity: 1 });
   };
 
   const handleDecrement = (item: CartItem) => {
+    if (isSyncing) return;
     if (item.quantity > 1) {
       addToCart({ ...item, quantity: -1 });
     }
@@ -48,14 +65,17 @@ const Cart: React.FC = () => {
     try {
       await cartSchema.validate({ cart });
 
+      setIsSyncing(true);
       const hasChanges = await updateCartInformation();
+      setIsSyncing(false);
 
       if (hasChanges || cart.some(item => item.stock === 0)) {
         setShowErrorModal(true);
         return;
       }
 
-      if (getTotalPrice() <= 0) {
+      const totalPrice = getTotalPrice();
+      if (totalPrice <= 0) {
         setShowWarning('El total del precio no puede ser 0 o menor.');
         return;
       }
@@ -64,7 +84,7 @@ const Cart: React.FC = () => {
 
       navigate('/payment-data', {
         state: {
-          totalAmount: getTotalPrice(),
+          totalAmount: totalPrice,
           cartItems: cart.map(item => ({
             product_code: item.product_code,
             quantity: item.quantity,
@@ -72,11 +92,14 @@ const Cart: React.FC = () => {
         },
       });
     } catch (error) {
+      setIsSyncing(false);
       if (error instanceof Yup.ValidationError) {
         setShowWarning(error.message);
       }
     }
   };
+
+  const totalPrice = getTotalPrice();
 
   return (
     <div className={styles.cart}>
@@ -106,20 +129,22 @@ const Cart: React.FC = () => {
               {cart.map(item => (
                 <div key={item.product_code} className={styles.cartItem}>
                   <img
-                    src={item.images[0]}
+                    src={item.images?.[0] ?? cartIcon}
                     alt={`Producto ${item.product_code}`}
                     className={styles.cartItemImage}
+                    onError={(e) => { (e.currentTarget as HTMLImageElement).src = cartIcon; }}
                   />
                   <div className={styles.cartItemDetails}>
                     <h4>Código de producto: {item.product_code}</h4>
                     <h2
                       onClick={() => navigate(`/product/${item.product_code}`)}
                       title="Ver detalles del producto"
+                      style={{ cursor: 'pointer' }}
                     >
                       {item.name}
                     </h2>
                     <h4>{item.description}</h4>
-                    <h4>${item.price.toLocaleString()} CLP</h4>
+                    <h4>${item.price.toLocaleString('es-CL')} CLP</h4>
                     {item.stock < 1 && (
                       <p className={styles.outOfStock}>Producto sin stock</p>
                     )}
@@ -128,8 +153,7 @@ const Cart: React.FC = () => {
                       <div className={styles.quantityControls}>
                         <button
                           onClick={() => handleDecrement(item)}
-                          disabled={item.quantity <= 1 || item.stock === 0}
-                          className={item.stock === 0 ? styles.outOfStock : ''}
+                          disabled={isSyncing || item.quantity <= 1 || item.stock === 0}
                         >
                           -
                         </button>
@@ -140,14 +164,16 @@ const Cart: React.FC = () => {
 
                         <button
                           onClick={() => handleIncrement(item)}
-                          disabled={item.quantity >= item.stock || item.stock === 0}
-                          className={item.stock === 0 ? styles.disabledButton : ''}
+                          disabled={isSyncing || item.quantity >= item.stock || item.stock === 0}
                         >
                           +
                         </button>
                       </div>
 
-                      <button onClick={() => removeFromCart(item.product_code)}>
+                      <button
+                        onClick={() => removeFromCart(item.product_code)}
+                        disabled={isSyncing}
+                      >
                         Eliminar
                       </button>
                     </div>
@@ -164,7 +190,7 @@ const Cart: React.FC = () => {
               Total de Productos:{' '}
               {cart.reduce((total, item) => total + item.quantity, 0)}
             </div>
-            <button onClick={clearCart} className={styles.checkoutButton}>
+            <button onClick={clearCart} className={styles.checkoutButton} disabled={isSyncing}>
               Vaciar Carrito
             </button>
           </div>
@@ -174,18 +200,14 @@ const Cart: React.FC = () => {
           <div className={styles.paymentDetails}>
             <img src={cartIcon} alt="Carrito" className={styles.cartIcon} />
             <div className={styles.total}>
-              Total: ${getTotalPrice().toLocaleString()} CLP
+              Total: ${totalPrice.toLocaleString('es-CL')} CLP
             </div>
           </div>
 
           <button
-            className={
-              getTotalPrice() <= 0
-                ? `${styles.payButton} ${styles.disabledButton}`
-                : styles.payButton
-            }
+            className={totalPrice <= 0 ? `${styles.payButton} ${styles.disabledButton}` : styles.payButton}
             onClick={handlePaymentClick}
-            disabled={getTotalPrice() <= 0}
+            disabled={isSyncing || totalPrice <= 0}
           >
             Pagar
           </button>
