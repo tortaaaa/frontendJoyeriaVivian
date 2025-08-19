@@ -16,9 +16,9 @@ const PaymentData: React.FC = () => {
   const location = useLocation();
 
   // ⬇️ ¡Importa setPaymentData y normalizeRut desde el ViewModel!
-  const { paymentData, setPaymentData, handleChange, validateForm, errors, handleRutBlur, normalizeRut } = usePaymentViewModel();
+  const { paymentData, handleChange, validateForm, errors, handleRutBlur, normalizeRut } = usePaymentViewModel();
 
-  const [totalAmount, setTotalAmount] = useState<number>(0);
+  const [, setTotalAmount] = useState<number>(0);
   const [cartItems, setCartItems] = useState<Array<{ product_code: string; quantity: number }>>([]);
 
   useEffect(() => {
@@ -36,45 +36,52 @@ const PaymentData: React.FC = () => {
   const [isRedirecting, setIsRedirecting] = useState(false);
 
   // CORREGIDO: Forzar normalización antes de validar y enviar datos
-  const handlePayment = async () => {
-    // Normaliza el RUT ANTES de validar y enviar
-    const rutNormalized = normalizeRut(paymentData.client_rut);
-    if (paymentData.client_rut !== rutNormalized) {
-      setPaymentData(prev => ({ ...prev, client_rut: rutNormalized }));
-    }
+const handlePayment = async () => {
+  const rutNormalized = normalizeRut(paymentData.client_rut);
 
-    // IMPORTANTE: como setState es async, espera a que se actualice con setTimeout 0
-    setTimeout(async () => {
-      if (!validateForm()) return;
-
-      const dataToSend = { ...paymentData, client_rut: rutNormalized, total_amount: totalAmount, cart_items: cartItems };
-
-      try {
-        setIsRedirecting(true);
-        const response = await paymentUseCase.initiateTransaction(dataToSend);
-
-        const form = document.createElement('form');
-        form.method = 'POST';
-        form.action = response.url;
-
-        const tokenInput = document.createElement('input');
-        tokenInput.type = 'hidden';
-        tokenInput.name = 'token_ws';
-        tokenInput.value = response.token;
-        form.appendChild(tokenInput);
-        document.body.appendChild(form);
-
-        form.submit();
-        //navigate(`/payment-voucher?sale_code=${response.buy_order}`);
-      } catch (error) {
-        setIsRedirecting(false);
-        console.error('Error al iniciar la transacción:', error);
-        navigate('/payment-fail', {
-          state: { message: 'No se pudo iniciar la transacción. Por favor, inténtelo nuevamente.' },
-        });
-      }
-    }, 0);
+  // No dependas de setState async; prepara el payload en variables locales
+  const dataToSend = {
+    client_name: paymentData.client_name,
+    client_rut: rutNormalized,
+    client_phone: paymentData.client_phone,
+    client_mail: paymentData.client_mail,
+    client_region: paymentData.client_region,
+    client_city: paymentData.client_city,
+    address_name: paymentData.address_name,
+    address_number: paymentData.address_number,
+    additional_info: paymentData.additional_info ?? '',
+    cart_items: cartItems.map(it => ({
+      product_code: it.product_code,
+      quantity: it.quantity,
+    })),
   };
+
+  try {
+    if (!validateForm()) return;
+
+    setIsRedirecting(true);
+    const response = await paymentUseCase.initiateTransaction(dataToSend);
+
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = response.url;
+
+    const tokenInput = document.createElement('input');
+    tokenInput.type = 'hidden';
+    tokenInput.name = 'token_ws';
+    tokenInput.value = response.token;
+    form.appendChild(tokenInput);
+
+    document.body.appendChild(form);
+    form.submit();
+  } catch (error) {
+    setIsRedirecting(false);
+    console.error('Error al iniciar la transacción:', error);
+    navigate('/payment-fail', {
+      state: { message: 'No se pudo iniciar la transacción. Por favor, inténtelo nuevamente.' },
+    });
+  }
+};
 
   return (
     <div className={styles.container}>
