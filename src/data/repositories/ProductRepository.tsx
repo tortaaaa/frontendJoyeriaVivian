@@ -89,8 +89,13 @@ export class ProductRepositoryImpl implements ProductRepository {
   }
 
   async createProduct(productData: Product): Promise<Product> {
-    const response = await api.post(`/products/`, productData);
-    return response.data;
+    try {
+      const response = await api.post(`/products/`, productData);
+      return response.data;
+    } catch (err: any) {
+      // Re-lanza para que ViewModel muestre el mensaje del backend
+      throw err;
+    }
   }
 
   async updateProduct(product_code: string, productData: Product): Promise<Product> {
