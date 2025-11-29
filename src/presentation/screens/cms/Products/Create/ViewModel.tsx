@@ -33,31 +33,31 @@ export const useViewModel = () => {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      // 1. Crea el producto (sin imágenes)
-      const prodData = { ...product, images: [] };
-      await ProductCrud.create(prodData);
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setError("");
+  setLoading(true);
+  try {
+    const prodData = { ...product, images: [] };
+    await ProductCrud.create(prodData);
 
-      // 2. Asocia imágenes al producto en la base de datos (una request por cada imagen)
-      await Promise.all(
-        product.images.map(async (imgUrl) => {
-          await api.post('/api/images/', {
-            product: product.product_code,
-            url: imgUrl,
-          });
-        })
-      );
+    await Promise.all(
+      product.images.map(async (imgUrl) => {
+        await api.post('/images/', { product: product.product_code, url: imgUrl });
+      })
+    );
 
-      navigate("/cms/products");
-    } catch {
-      setError("Error al crear el producto.");
-    } finally {
-      setLoading(false);
-    }
-  };
+    navigate("/cms/products");
+  } catch (err: any) {
+    const backendMsg =
+      err?.response?.data?.message ||
+      err?.response?.data?.detail ||
+      "Error al crear el producto.";
+    setError(backendMsg);
+  } finally {
+    setLoading(false);
+  }
+};
 
   return { product, setProduct, handleSubmit, loading, error, handleRemoveImage };
 };

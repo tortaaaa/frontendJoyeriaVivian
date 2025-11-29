@@ -1,6 +1,13 @@
 /// <reference types="vite/client" />
 
-declare module '@env' {
+// Si quieres declarar otras variables personalizadas:
+interface ImportMetaEnv {
+  readonly VITE_API_URL: string
+  readonly VITE_CLOUDINARY_CLOUD_NAME: string
+  readonly VITE_CLOUDINARY_UPLOAD_PRESET: string
+  // agrega más si necesitas...
+}
 
-    export const EMAILJS_PUBLIC_KEY : string;
+interface ImportMeta {
+  readonly env: ImportMetaEnv
 }

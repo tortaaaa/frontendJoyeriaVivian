@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { ProductCrud } from '../../../../../domain/useCases/product/ProductCrud';
 import { useNavigate } from 'react-router-dom';
 import { Product } from '../../../../../domain/entities/Product';

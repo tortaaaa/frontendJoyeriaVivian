@@ -22,20 +22,31 @@
   display: flex;
   width: fit-content;
   animation: scroll 40s linear infinite;
+  transition: transform 0.3s ease; /* Para permitir agrandamiento */
 }
 
+/* Pausar animación y agrandar el carrusel al hacer hover */
 .carouselWrapper:hover .carousel {
   animation-play-state: paused;
+  transform: scale(1.05); /* Agrandar todo el carrusel */
 }
 
+/* Estilo individual de cada slide */
 .slide {
   flex: 0 0 auto;
   margin: 0 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: transform 0.3s ease; /* Para el hover */
 }
 
+/* Agrandar cada slide al hacer hover */
+.slide:hover {
+  transform: scale(1.1);
+}
+
+/* Estilo de las imágenes */
 .slide img {
   width: 200px;
   height: 200px;
@@ -45,7 +56,7 @@
   border: 2px solid #fff;
 }
 
-/* Nuevo estilo para mostrar los nombres */
+/* Nombre debajo de cada categoría */
 .categoryName {
   margin-top: 10px;
   font-size: 16px;
@@ -54,6 +65,7 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Animación para deslizar el carrusel */
 @keyframes scroll {
   0% {
     transform: translateX(0);

@@ -2,12 +2,12 @@ import React from 'react';
 import Slider from "react-slick";
 import { useNavigate } from 'react-router-dom';
 import styles from './Home.module.css';
-import slide1 from '../../../../src/assets/images/slide1.jpg';
-import slide2 from '../../../../src/assets/images/slide2.jpg';
-import slide3 from '../../../../src/assets/images/slide3.jpg';
-import slide4 from '../../../../src/assets/images/slide4.jpg';
-import nuevoslide1 from '../../../../src/assets/images/envio1.jpg';
-import nuevoslide2 from '../../../../src/assets/images/envio2.jpg';
+import slide1 from '../../../../src/assets/images/slide1.png';
+import slide2 from '../../../../src/assets/images/slide2.png';
+import slide3 from '../../../../src/assets/images/slide3.png';
+import slide4 from '../../../../src/assets/images/slide4.png';
+import nuevoslide1 from '../../../../src/assets/images/envio1.png';
+import nuevoslide2 from '../../../../src/assets/images/envio2.png';
 import { sliderSettings } from './ViewModel';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
@@ -38,11 +38,18 @@ const Home: React.FC = () => {
         </Slider>
 
         <div className={styles.text}>
-          <h2>HardWear by Tiffany</h2>
+          <h2>Bienvenidos a Joyería VIVIAN</h2>
           <p>
-            Showcasing individual stories of power and resilience, award-winning actresses Greta Lee and Mikey Madison and acclaimed painter Anna Weyant wear the bold links of HardWear by Tiffany, a symbol of love’s transformative strength. 
+            Descubre la elegancia y el brillo que mereces. 
           </p>
-          <button className={styles.button}>Descubre más</button>
+          <p>
+          En Vivian diseñamos piezas únicas que realzen con tu estilo y capturen momentos inolvidables.
+          </p>
+          <p>
+         Nos destacamos por ofrecer calidad, exclusividad y una pasión única por la joyería en cada detalle.
+          </p>
+          <p>Tu belleza merece brillar. </p>
+          <button className={styles.button}onClick={() => navigate('/products/matrimonio')}>Descubre Más</button>
         </div>
       </div>
 
@@ -51,7 +58,7 @@ const Home: React.FC = () => {
         <div className={styles.text}>
           <h2>Descubre nuestra colección</h2>
           <p>Explora las piezas más exclusivas y elegantes diseñadas para ti.</p>
-          <button className={styles.button}>Comprar Ahora</button>
+          <button className={styles.button}onClick={() => navigate('/products/anillos')}>Comprar Ahora</button>
         </div>
         <div className={styles.sliderWrapper}>
           <Slider {...sliderSettings} className={styles.slider}>

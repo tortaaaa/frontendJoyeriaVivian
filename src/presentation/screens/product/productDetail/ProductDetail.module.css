@@ -11,8 +11,9 @@
 
 .imageSection {
   flex: 1;
-  max-width: 45%;
+  max-width: 30%;
   text-align: center;
+  overflow: hidden; /* Para que el zoom no se salga */
 }
 
 .slider {
@@ -22,14 +23,11 @@
 
 .productImage {
   width: 100%;
-  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
   border-radius: 8px;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.productImage:hover {
-  transform: scale(1.02);
+  cursor: zoom-in;
+  transition: transform 0.2s ease;
 }
 
 .thumbnailContainer {
@@ -42,16 +40,17 @@
 
 .thumbnail {
   width: 60px;
-  height: 60px;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   border: 2px solid transparent;
   border-radius: 4px;
   cursor: pointer;
-  transition: border 0.2s;
+  transition: border 0.2s, transform 0.2s;
 }
 
 .thumbnail:hover {
   border-color: #D6B469;
+  transform: scale(1.1);
 }
 
 .infoSection {
@@ -65,12 +64,6 @@
 .infoSection h1 {
   margin: 0 0 10px 0;
   font-size: 1.8rem;
-}
-
-.infoSection h2 {
-  margin: 0 0 20px 0;
-  font-size: 1.2rem;
-  color: #777;
 }
 
 .description {
@@ -88,7 +81,19 @@
   margin: 20px 0;
 }
 
-.outOfStockMessage {
+.originalPrice {
+  text-decoration: line-through;
+  color: #999;
+  margin-right: 10px;
+}
+
+.discountedPrice {
+  color: #D6B469;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.outOfStock {
   color: white;
   background-color: red;
   padding: 6px 12px;
@@ -104,34 +109,20 @@
   margin-top: 20px;
 }
 
-.buyButton,
-.cartButton {
+.quoteButton {
   padding: 10px 20px;
   font-size: 1rem;
   border-radius: 5px;
   cursor: pointer;
   width: 175px;
   transition: all 0.2s ease;
-}
-
-.buyButton {
-  background-color: #D6B469;
+  background-color: #007bff; /* Azul */
   color: white;
   border: none;
 }
 
-.buyButton:hover {
-  background-color: #b88a42;
-}
-
-.cartButton {
-  background-color: #fff;
-  color: #D6B469;
-  border: 1px solid #D6B469;
-}
-
-.cartButton:hover {
-  background-color: #f8f8f8;
+.quoteButton:hover {
+  background-color: #0056b3;
 }
 
 .disabled {
@@ -139,4 +130,36 @@
   color: #ffffff !important;
   cursor: not-allowed !important;
   border: none !important;
+}
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 768px) {
+  .productDetail {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .imageSection, .infoSection {
+    max-width: 95%;
+  }
+
+  .productImage {
+    max-height: 500px;
+  }
+}
+
+@media (max-width: 480px) {
+  .productImage {
+    max-height: 350px;
+  }
+
+  .thumbnail {
+    width: 55px;
+  }
+
+  .quoteButton {
+    width: 150px;
+    font-size: 1rem;
+  }
 }

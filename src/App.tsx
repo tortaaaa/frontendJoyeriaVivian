@@ -12,8 +12,8 @@ import PaymentVoucher from './presentation/screens/payment/paymentSuccess/Paymen
 import PaymentFail from './presentation/screens/payment/paymentFail/PaymentFail';
 import Orfebreria from './presentation/components/Orfebreria';
 
-import TransbankLogin from './presentation/screens/transbankLogin/TransbankLogin';
-import PrivateRoute from './presentation/components/PrivateRoute';
+//import TransbankLogin from './presentation/screens/transbankLogin/TransbankLogin';
+//import PrivateRoute from './presentation/components/PrivateRoute';
 
 import CmsLogin from './presentation/screens/cms/LoginCMS/CmsLogin';
 import PrivateRouteCMS from './presentation/components/PrivateRouteCMS';
@@ -29,7 +29,7 @@ const App: React.FC = () => {
     <Router>
       <Routes>
         {/* Login Transbank (página pública) */}
-        <Route path="/transbank-login" element={<TransbankLogin />} />
+        {/* <Route path="/transbank-login" element={<TransbankLogin />} /> */}
 
         {/* Login CMS (página pública) */}
         <Route path="/cms/login" element={<CmsLogin />} />
@@ -51,7 +51,6 @@ const App: React.FC = () => {
 
         {/* RUTAS PRIVADAS TRANSBANK */}
         <Route path="/*" element={
-          <PrivateRoute>
             <MainLayout>
               <Routes>
                 <Route path="/" element={<Home />} />
@@ -66,7 +65,6 @@ const App: React.FC = () => {
                 <Route path="/payment-fail" element={<PaymentFail />} />
               </Routes>
             </MainLayout>
-          </PrivateRoute>
         } />
       </Routes>
     </Router>

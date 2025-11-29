@@ -1,17 +1,32 @@
-/* ProductList.module.css */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap'); /* Fuente Roboto */
 
+/* === LAYOUT GENERAL ======================================================= */
 .container {
   display: flex;
   padding: 20px;
   box-sizing: border-box;
-  align-items: flex-start; /* Alinea los elementos al principio verticalmente */
+  align-items: flex-start;
 }
 
+.products {
+  flex: 1;
+}
+
+.products h1 {
+  text-align: center;
+  margin-top: -20px;
+  margin-bottom: 20px;
+  color: black;
+  font-size: 2.8rem;
+  font-weight: 700;
+  word-break: break-word;
+}
+
+/* === FILTROS / SIDEBAR ==================================================== */
 .hamburger {
   display: none;
-  background: #D6B469;        /* negro */
-  color: #fff;             /* icono blanco */
+  background: #D6B469;
+  color: #fff;
   border: none;
   font-size: 2rem;
   cursor: pointer;
@@ -27,7 +42,7 @@
   border-radius: 10px;
   margin-right: 20px;
   transition: transform 0.3s ease-in-out;
-  font-family: 'Roboto', sans-serif; /* Aplicar la fuente Roboto */
+  font-family: 'Roboto', sans-serif;
 }
 
 .filterSection {
@@ -74,35 +89,27 @@
   margin: 2px 5px;
 }
 
+.filtersClose {
+  display: none;
+}
+
 .show {
-  display: block !important; /* Asegurar que el filtro se muestre cuando se active */
+  display: block !important;
 }
 
-.products {
-  flex: 1;
-}
-
-.products h1 {
-  text-align: center;
-  margin-top: -20px;
-  margin-bottom: 20px;
-  color: black;
-  font-size: 2.8rem;
-  font-weight: 700;
-  word-break: break-word;
-}
-
+/* === GRID DE PRODUCTOS ==================================================== */
 .productGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Cambia el número de columnas a 3 */
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 
 .productLink {
-  text-decoration: none; /* Elimina el subrayado predeterminado del enlace */
-  color: inherit; /* Usa el color inherente del texto */
+  text-decoration: none;
+  color: inherit;
 }
 
+/* === ESTILO ANTERIOR (compatibilidad) ===================================== */
 .productCard {
   position: relative;
   background-color: #fff;
@@ -112,25 +119,25 @@
   color: rgb(0, 0, 0);
   border-radius: 10px;
   cursor: pointer;
-  transition: transform 0.2s; /* Añade una transición para el efecto hover */
+  transition: transform 0.2s;
 }
-
-.productCard:hover {
-  transform: translateY(-5px); /* Efecto de elevación al pasar el mouse */
-}
+.productCard:hover { transform: translateY(-5px); }
 
 .productImage {
-  max-width: 100%;
-  height: auto;
-  margin-bottom: 10px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
+/* Precio genérico (listados antiguos) */
 .price {
   color: #D6B469;
   font-weight: bold;
   margin: 10px 0;
 }
 
+/* Botón genérico antiguo */
 .buyButton {
   background-color: #D6B469;
   color: white;
@@ -139,15 +146,8 @@
   cursor: pointer;
   border-radius: 5px;
 }
-
-.buyButton:hover {
-  background-color: #b88a42;
-}
-
-.buyButton.disabled {
-  background-color: #ccc; /* Cambia el color del botón a gris cuando está deshabilitado */
-  cursor: not-allowed; /* Cambia el cursor a no permitido */
-}
+.buyButton:hover { background-color: #b88a42; }
+.buyButton.disabled { background-color: #ccc; cursor: not-allowed; }
 
 .soldOut {
   position: absolute;
@@ -159,14 +159,15 @@
   border-radius: 5px;
   font-weight: bold;
   font-size: 12px;
+  z-index: 10;
 }
 
+/* === PAGINACIÓN =========================================================== */
 .pagination {
   display: flex;
   justify-content: center;
   margin-top: 20px;
 }
-
 .pagination button {
   background-color: #f4f4f4;
   border: 1px solid #ccc;
@@ -176,54 +177,44 @@
   cursor: pointer;
   border-radius: 5px;
 }
-
-.pagination button:hover {
-  background-color: #e4e4e4;
-}
-
+.pagination button:hover { background-color: #e4e4e4; }
 .pagination .active {
   background-color: #D6B469;
   color: white;
   border: none;
 }
 
-/* Para todas las pantallas */
+/* === PLACEHOLDER DE IMAGEN ================================================= */
 .noImageContainer {
   position: relative;
   display: inline-block;
   text-align: center;
+  z-index: 1;
 }
-
-.noImageContainer img {
-  width: 100%;
-  height: auto;
-}
+.noImageContainer img { width: 100%; height: auto; }
 
 .noImageText {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   color: white;
-  background-color: rgba(99, 99, 99, 0.6); /* Fondo oscuro para el texto */
+  background-color: rgba(99, 99, 99, 0.6);
   padding: 10px 15px;
   font-size: 1rem;
   border-radius: 5px;
+  z-index: 2;
 }
-
 .noImageBackground {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(219, 218, 218, 0.7); /* Recuadro gris semitransparente */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px; /* Para redondear esquinas si es necesario */
-
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(219, 218, 218, 0.7);
+  display: flex; justify-content: center; align-items: center;
+  border-radius: 5px;
+  z-index: 1;
 }
+
+/* === MENSAJES ============================================================= */
 .noProductsMessage {
   text-align: center;
   grid-column: 1 / -1;
@@ -234,7 +225,6 @@
   border-radius: 12px;
   padding: 40px 0;
 }
-
 .errorMsg {
   color: #c03030;
   font-weight: bold;
@@ -244,16 +234,101 @@
   padding: 15px;
   border-radius: 8px;
 }
-.filtersClose {
-  display: none;  /* por defecto, oculto */
+
+/* ==========================================================================
+   NUEVO LOOK DE TARJETA (para <article class="card">)
+   Imagen centrada, título pesado, 3 líneas, precio grande, botón dorado.
+   ========================================================================== */
+
+.cardLink { cursor: pointer; outline: none; text-decoration: none; color: inherit; }
+
+.card {
+  position: relative;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  padding: 22px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.card:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,0.10); }
+
+/* --- Imagen a tamaño completo dentro de la card --- */
+.imgWrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;      /* cuadrada; cámbialo a 16/9 si prefieres más “banner” */
+  margin-bottom: 14px;
+  overflow: hidden;          /* recorta el excedente al hacer cover */
+  border-radius: 12px;       /* para que la imagen siga redondeada */
+  display: block;
 }
 
-/* Media query para pantallas medianas y pequeñas */
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;         /* llena todo el espacio */
+  display: block;            /* elimina espacios fantasma */
+}
+
+/* Título del producto */
+.title {
+  font-family: 'Roboto', sans-serif;
+  font-size: 22px;
+  line-height: 1.25;
+  font-weight: 800;
+  color: #3e3426;
+  margin: 6px 0 8px;
+  text-align: center;
+}
+
+/* Especificaciones (Material, Piedra, Código) */
+.meta {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  color: #5a544c;
+  line-height: 1.6;
+  margin-bottom: 6px;
+  text-align: left;
+}
+.metaLabel { font-weight: 700; }
+
+.subtitle{
+  font-family: "Playfair Display", serif;
+  letter-spacing: .2px;
+}
+/* Precio protagonista (oscuro como la maqueta) */
+.card .price {
+  font-size: 28px;
+  font-weight: 800;
+  color: #3e3426;
+  text-align: center;
+  margin: 12px 0 8px;
+}
+
+/* Botón “Compra Ya” (usa tu dorado) */
+.cta {
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-weight: 700;
+  font-size: 16px;
+  background: #D6B469;
+  color: #ffffff;
+  cursor: pointer;
+  transition: filter .15s ease, transform .05s ease;
+}
+.cta:hover { filter: brightness(0.98); }
+.cta:active { transform: translateY(1px); }
+.disabled, .cta:disabled { opacity: .6; cursor: not-allowed; }
+
+/* ❌ Intencionalmente NO hay override .card .soldOut para mantener la roja */
+
+/* === RESPONSIVE =========================================================== */
 @media (max-width: 1200px) {
-  .productGrid {
-    grid-template-columns: repeat(2, 1fr); /* Cambia a 2 columnas en pantallas medianas */
-  }
-    .products h1 {
+  .productGrid { grid-template-columns: repeat(2, 1fr); }
+  .products h1 {
     font-size: 2.1rem;
     margin-top: 0;
     margin-bottom: 14px;
@@ -261,7 +336,7 @@
 }
 
 @media (max-width: 768px) {
-    .products h1 {
+  .products h1 {
     font-size: 2rem;
     margin-top: 0;
     margin-bottom: 10px;
@@ -269,6 +344,7 @@
     padding-right: 2vw;
     line-height: 1.18;
   }
+
   .filters {
     display: none;
     position: fixed;
@@ -286,10 +362,7 @@
     transform: translateX(-100%);
     transition: transform 0.35s cubic-bezier(.77,.2,.05,1.0);
   }
-  .filters.show {
-    display: block !important;
-    transform: translateX(0);
-  }
+  .filters.show { display: block !important; transform: translateX(0); }
 
   .filtersClose {
     display: block;
@@ -320,52 +393,11 @@
     pointer-events: auto;
   }
 
-  .hamburger {
-    display: block; /* Mostrar el botón de hamburguesa en pantallas pequeñas */
-  }
+  .hamburger { display: block; }
+  .productGrid { grid-template-columns: repeat(1, 1fr); }
+  .container { padding: 10px 2vw; }
 
-  .productGrid {
-    grid-template-columns: repeat(1, 1fr); /* Cambia a 1 columna en pantallas pequeñas */
-  }
-
-  .noImageContainer {
-    position: relative;
-    display: inline-block;
-    text-align: center;
-  }
-  
-  .noImageContainer img {
-    width: 100%;
-    height: auto;
-  }
-  
-  .noImageText {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    background-color: rgba(0, 0, 0, 0.6); /* Fondo oscuro para el texto */
-    padding: 10px 15px;
-    font-size: 1rem;
-    border-radius: 5px;
-  }
-  
-  .noImageBackground {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(219, 218, 218, 0.7); /* Recuadro gris semitransparente */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px; /* Para redondear esquinas si es necesario */
-  }
-    .container {
-    padding: 10px 2vw;
-  }
-
+  /* Ajustes tipográficos móviles */
+  .title { font-size: 20px; }
+  .card .price { font-size: 24px; }
 }
-

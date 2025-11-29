@@ -8,7 +8,7 @@ const images = [
   { name: 'Pulseras', image: '/images/categories/joya4.jpg', path: '/products/pulseras' },
   { name: 'Anillos de Matrimonio', image: '/images/categories/joya5.jpg', path: '/products/matrimonio' },
   { name: 'Aros de Bebé', image: '/images/categories/joya6.png', path: '/products/matrimonio' },
-  { name: 'Joyas para hombres', image: '/images/categories/joya7.png', path: '/products/Joyas para hombres' },
+  { name: 'Hombres', image: '/images/categories/joya7.png', path: '/products/hombres' },
   { name: 'Colgantes', image: '/images/categories/joya8.png', path: '/products/colgantes' }
 ];
 
