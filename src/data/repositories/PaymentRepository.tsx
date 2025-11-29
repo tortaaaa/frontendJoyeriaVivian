@@ -65,9 +65,15 @@ export class PaymentRepositoryImpl implements PaymentRepository {
   async fetchSales(): Promise<Sale[]> {
     try {
       const response = await api.get('/payment/sales/');
-      return response.data;
+      const raw = response.data;
+      // Normalizar siempre a arreglo
+      if (Array.isArray(raw)) return raw as Sale[];
+      if (raw && Array.isArray(raw.results)) return raw.results as Sale[];
+      return [];
     } catch (error) {
       console.error('[ERROR] Error al listar ventas:', error);
+      // En error, propagamos para que el ViewModel muestre el mensaje,
+      // pero evitamos devolver undefined.
       throw error;
     }
   }

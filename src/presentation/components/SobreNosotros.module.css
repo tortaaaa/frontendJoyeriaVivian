@@ -1,0 +1,226 @@
+/* CONTENEDOR PRINCIPAL */
+.about {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  background-color: #ffffff;
+  overflow-x: hidden;
+  font-family: sans-serif;
+}
+
+/* SECCIÓN PRINCIPAL: TEXTO + IMAGEN */
+.hero {
+  width: 100%;
+  padding: 60px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.heroText {
+  flex: 1 1 300px;
+  max-width: 600px;
+  color: #000;
+  text-align: left;
+  font-size: 18px;
+}
+
+.heroText h1 {
+  margin-bottom: 20px;
+  font-size: 32px;
+  letter-spacing: 0.5px;
+}
+
+.heroText p {
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+.heroImage {
+  flex: 1 1 300px;
+  max-width: 600px;
+}
+
+.heroImage img {
+  width: 100%;
+  max-height: 600px;
+  object-fit: cover;
+  display: block;
+  border-radius: 0;
+}
+
+/* SECCIONES GENERALES */
+.section,
+.sectionAlt {
+  width: 100%;
+  padding: 60px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+}
+
+.sectionAlt {
+  background-color: #f8f4ec; /* tono suave relacionado al dorado */
+}
+
+.sectionHeader {
+  max-width: 800px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.sectionHeader h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.sectionHeader p {
+  font-size: 18px;
+  margin: 0;
+}
+
+/* GRID DE TARJETAS (NUESTRAS JOYAS) */
+.cardsGrid {
+  width: 100%;
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  padding: 20px;
+  border: 1px solid #e5e5e5;
+  background-color: #ffffff;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.card h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.card p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* LISTA DIFERENCIALES */
+.bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: 900px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.bullets li {
+  padding: 16px 20px;
+  border-left: 4px solid #d6b469;
+  background-color: #ffffff;
+  border-radius: 4px;
+}
+
+.bulletTitle {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* SECCIÓN CTA FINAL */
+.ctaSection {
+  width: 100%;
+  padding: 60px 20px 80px;
+  display: flex;
+  justify-content: center;
+  background-color: #ffffff;
+}
+
+.ctaContent {
+  max-width: 800px;
+  text-align: center;
+}
+
+.ctaContent h2 {
+  font-size: 28px;
+  margin-bottom: 16px;
+}
+
+.ctaContent p {
+  font-size: 18px;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.ctaButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+/* BOTONES */
+.button {
+  padding: 10px 20px;
+  background-color: #d6b469;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 0;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #b89542;
+}
+
+.buttonSecondary {
+  padding: 10px 20px;
+  background-color: transparent;
+  color: #d6b469;
+  border: 1px solid #d6b469;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.buttonSecondary:hover {
+  background-color: #d6b469;
+  color: #ffffff;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .heroText {
+    text-align: center;
+  }
+
+  .heroImage {
+    max-width: 100%;
+  }
+
+  .card {
+    text-align: center;
+  }
+
+  .bullets li {
+    text-align: left;
+  }
+}

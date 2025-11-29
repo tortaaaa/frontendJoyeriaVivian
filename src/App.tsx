@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MainLayout from './presentation/layouts/MainLayout';
 import Home from './presentation/screens/home/Home';
 import Contact from './presentation/screens/contact/Contact';
-import Information from './presentation/screens/information/Information';
 import ProductDetail from './presentation/screens/product/productDetail/ProductDetail';
 import ProductList from './presentation/screens/product/productList/ProductList';
 import Cart from './presentation/screens/cart/Cart';
@@ -11,7 +10,7 @@ import PaymentData from './presentation/screens/payment/paymentData/PaymentData'
 import PaymentVoucher from './presentation/screens/payment/paymentSuccess/PaymentVoucher';
 import PaymentFail from './presentation/screens/payment/paymentFail/PaymentFail';
 import Orfebreria from './presentation/components/Orfebreria';
-
+import SobreNosotros from './presentation/components/SobreNosotros';
 //import TransbankLogin from './presentation/screens/transbankLogin/TransbankLogin';
 //import PrivateRoute from './presentation/components/PrivateRoute';
 
@@ -55,7 +54,7 @@ const App: React.FC = () => {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/contact" element={<Contact />} />
-                <Route path="/information" element={<Information />} />
+                <Route path="/sobre-nosotros" element={<SobreNosotros />} />
                 <Route path="/orfebreria" element={<Orfebreria />} />
                 <Route path="/product/:product_code" element={<ProductDetail />} />
                 <Route path="/products/:category" element={<ProductList />} />

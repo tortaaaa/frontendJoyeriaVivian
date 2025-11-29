@@ -26,48 +26,56 @@ const CmsSales: React.FC = () => {
   return (
     <div className={styles.container}>
       <h2>Ventas realizadas</h2>
-      <div className={styles.tableContainer}>
-        <table>
-          <thead>
-            <tr>
-              <th>Código</th>
-              <th>Cliente</th>
-              <th>Monto</th>
-              <th>Fecha</th>
-              <th>Productos</th>
-              <th>Estado</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sales.map((sale) => {
-              const uiStatus = sale.uiStatus; // calculado en el ViewModel
-              const products = productSummaryBySale[sale.sale_code] ?? '—';
-              return (
-                <tr key={sale.sale_code}>
-                  <td>{sale.sale_code}</td>
-                  <td>{sale.client_name}</td>
-                  <td>{formatCLP(sale.total_price)}</td>
-                  <td>{formatDate(sale.sale_date)}</td>
-                  <td>{products}</td>
-                  <td>
-                    <select
-                      className={styles[`status-${uiStatus}`]}
-                      value={uiStatus}
-                      onChange={(e) => updateSaleStatusUI(sale.sale_code, e.target.value as typeof uiStatus)}
-                    >
-                      {UI_STATUS_OPTIONS.map((opt) => (
-                        <option key={opt.value} value={opt.value}>
-                          {opt.label}
-                        </option>
-                      ))}
-                    </select>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+
+      {/* Estado vacío */}
+      {sales.length === 0 ? (
+        <div className={styles.info}>No hay ventas registradas</div>
+      ) : (
+        <div className={styles.tableContainer}>
+          <table>
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Cliente</th>
+                <th>Monto</th>
+                <th>Fecha</th>
+                <th>Productos</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              {sales.map((sale) => {
+                const uiStatus = sale.uiStatus; // calculado en el ViewModel
+                const products = productSummaryBySale[sale.sale_code] ?? '—';
+                return (
+                  <tr key={sale.sale_code}>
+                    <td>{sale.sale_code}</td>
+                    <td>{sale.client_name}</td>
+                    <td>{formatCLP(sale.total_price)}</td>
+                    <td>{formatDate(sale.sale_date)}</td>
+                    <td>{products}</td>
+                    <td>
+                      <select
+                        className={styles[`status-${uiStatus}`]}
+                        value={uiStatus}
+                        onChange={(e) =>
+                          updateSaleStatusUI(sale.sale_code, e.target.value as typeof uiStatus)
+                        }
+                      >
+                        {UI_STATUS_OPTIONS.map((opt) => (
+                          <option key={opt.value} value={opt.value}>
+                            {opt.label}
+                          </option>
+                        ))}
+                      </select>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };
